@@ -79,13 +79,15 @@
             padding-right: max(1rem, env(safe-area-inset-right));
         }
 
-        /* Ambient Glow Effects */
+        /* Ambient Glow Effects (Mobile: centered & contained to avoid edge clipping) */
         .ambient-glow-yellow {
             position: fixed;
-            top: -10%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
+            top: 12%;
+            left: -12%;
+            width: 75vw;
+            height: 75vw;
+            max-width: 320px;
+            max-height: 320px;
             background: radial-gradient(circle, rgba(255, 184, 0, 0.08) 0%, rgba(255, 184, 0, 0) 70%);
             z-index: 0;
             pointer-events: none;
@@ -93,13 +95,37 @@
 
         .ambient-glow-green {
             position: fixed;
-            bottom: -15%;
-            right: -10%;
-            width: 55vw;
-            height: 55vw;
-            background: radial-gradient(circle, rgba(74, 222, 128, 0.06) 0%, rgba(74, 222, 128, 0) 70%);
+            bottom: 14%;
+            right: -12%;
+            width: 80vw;
+            height: 80vw;
+            max-width: 340px;
+            max-height: 340px;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.07) 0%, rgba(74, 222, 128, 0) 70%);
             z-index: 0;
             pointer-events: none;
+        }
+
+        @media (min-width: 1024px) {
+            .ambient-glow-yellow {
+                top: -10%;
+                left: -10%;
+                width: 50vw;
+                height: 50vw;
+                max-width: none;
+                max-height: none;
+                background: radial-gradient(circle, rgba(255, 184, 0, 0.08) 0%, rgba(255, 184, 0, 0) 70%);
+            }
+
+            .ambient-glow-green {
+                bottom: -15%;
+                right: -10%;
+                width: 55vw;
+                height: 55vw;
+                max-width: none;
+                max-height: none;
+                background: radial-gradient(circle, rgba(74, 222, 128, 0.06) 0%, rgba(74, 222, 128, 0) 70%);
+            }
         }
 
         /* Phone Slideshow Responsive Dimensions with Exact Aspect Ratio */
