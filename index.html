@@ -51,7 +51,7 @@
         @media (min-width: 1024px) {
             html, body {
                 height: 100vh;
-                overflow-y: hidden; /* Stops layout shift and blink on load */
+                overflow-y: hidden;
             }
         }
 
@@ -127,7 +127,6 @@
             border-radius: 50%;
         }
 
-        /* Smooth zero-shift entrance */
         @keyframes fadeInSafe {
             0% { opacity: 0; }
             100% { opacity: 1; }
@@ -142,7 +141,7 @@
 <body class="flex flex-col min-h-screen lg:h-screen lg:overflow-hidden justify-between font-sans selection:bg-app-yellow selection:text-black antialiased relative">
 
     <header class="w-full max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-10 pt-4 pb-2 shrink-0 z-30 animate-fade-up">
-        <a href="#" class="flex items-center gap-3 group">
+        <a href="https://schedlix-app.github.io/" class="flex items-center gap-3 group">
             <div class="w-10 h-10 bg-app-panel border border-app-border rounded-xl flex items-center justify-center text-app-yellow shadow-md group-hover:border-app-yellow/50 transition-colors">
                 <i data-lucide="calendar-check-2" class="w-5 h-5"></i>
             </div>
@@ -258,11 +257,11 @@
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3 font-mono text-[11px] font-semibold text-app-muted uppercase">
-                    <div class="flex items-center gap-2 bg-app-panel/90 backdrop-blur-sm border border-app-border pl-1.5 pr-3 py-1.5 rounded-lg">
+                    <div class="flex items-center gap-2 bg-app-panel/90 backdrop-blur-sm border border-app-border pl-1.5 pr-3 py-1 rounded-lg">
                         <span class="bg-app-yellow text-black px-1.5 py-0.5 rounded font-bold text-[9px]">30 DAYS</span>
                         <span>Free Premium</span>
                     </div>
-                    <div class="flex items-center gap-2 bg-app-panel/90 backdrop-blur-sm border border-app-border pl-1.5 pr-3 py-1.5 rounded-lg">
+                    <div class="flex items-center gap-2 bg-app-panel/90 backdrop-blur-sm border border-app-border pl-1.5 pr-3 py-1 rounded-lg">
                         <span class="bg-app-green text-black px-1.5 py-0.5 rounded font-bold text-[9px]">100%</span>
                         <span>Secure & Private</span>
                     </div>
