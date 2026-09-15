@@ -1,13 +1,3 @@
-Ось рішення! Тепер реалізовано чітке архітектурне вирівнювання:
-
-### 📐 Що зроблено:
-1. **Верхній блок (Текст і заголовок)**: піднято до самого верху і вирівняно по **верхньому краю телефону**.
-2. **Нижній блок (Фічі + Бейджі)**: вирівняно по **нижньому краю QR-блоку / кнопки Download**.
-3. Між ними створено природний вільний простір (`justify-between`), тому текст більше не «злипається» з фічами, а сторінка виглядає гармонійно та просторо.
-
----
-
-```html
 <!DOCTYPE html>
 <html lang="en" class="h-full antialiased">
 <head>
@@ -57,20 +47,25 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* Silky Smooth Ambient Glow (Zero Noise) */
+        /* Rich Vibrant Neon Glow System */
         html, body {
             min-height: 100%;
             background-color: #07080b;
             background-image: 
-                radial-gradient(1100px 900px at -5% -5%, rgba(255, 184, 0, 0.12) 0%, rgba(255, 184, 0, 0) 70%),
-                radial-gradient(1100px 900px at 105% 105%, rgba(52, 211, 153, 0.09) 0%, rgba(52, 211, 153, 0) 70%),
-                radial-gradient(750px 650px at 30% 45%, rgba(255, 184, 0, 0.07) 0%, rgba(255, 184, 0, 0) 70%);
+                radial-gradient(1200px 950px at -8% -8%, rgba(255, 184, 0, 0.28) 0%, rgba(255, 184, 0, 0.10) 35%, rgba(255, 184, 0, 0) 70%),
+                radial-gradient(1200px 950px at 108% 108%, rgba(52, 211, 153, 0.24) 0%, rgba(52, 211, 153, 0.08) 35%, rgba(52, 211, 153, 0) 70%),
+                radial-gradient(850px 700px at 28% 45%, rgba(255, 184, 0, 0.18) 0%, rgba(52, 211, 153, 0.07) 40%, rgba(7, 8, 11, 0) 75%);
             background-attachment: fixed;
             background-repeat: no-repeat;
             color: #f3f4f6;
         }
 
-        /* Phone Hardware Mockup */
+        /* Headline Neon Glow */
+        .neon-title-glow {
+            text-shadow: 0 0 40px rgba(255, 184, 0, 0.35), 0 0 80px rgba(255, 184, 0, 0.15);
+        }
+
+        /* Phone Hardware Mockup with Ambient Backlight */
         .phone-mockup {
             border: 6px solid #1a1e29;
             border-radius: 40px;
@@ -78,7 +73,8 @@
             background-color: #000;
             box-shadow: 
                 0 30px 70px -15px rgba(0, 0, 0, 0.95),
-                0 0 0 1px rgba(255, 255, 255, 0.08);
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 50px rgba(255, 184, 0, 0.15);
             position: relative;
             width: 250px;
             height: 480px;
@@ -98,7 +94,7 @@
             }
         }
 
-        /* Notch */
+        /* Hardware Notch */
         .notch {
             position: absolute;
             top: 0;
@@ -128,11 +124,12 @@
             content: '';
             width: 4px;
             height: 4px;
-            background: rgba(52, 211, 153, 0.7);
+            background: rgba(52, 211, 153, 0.8);
             border-radius: 50%;
+            box-shadow: 0 0 6px rgba(52, 211, 153, 0.9);
         }
 
-        /* Fade Animation */
+        /* Animation */
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(12px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -149,19 +146,19 @@
     <!-- Header Navigation -->
     <header class="w-full max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-10 pt-6 pb-2 shrink-0 z-30 animate-fade-up">
         <a href="#" class="flex items-center gap-3 group">
-            <div class="w-10 h-10 bg-app-panel border border-app-border rounded-xl flex items-center justify-center text-app-yellow shadow-lg group-hover:border-app-yellow/40 transition-colors">
-                <i data-lucide="calendar-check-2" class="w-5 h-5"></i>
+            <div class="w-10 h-10 bg-app-panel border border-app-border rounded-xl flex items-center justify-center text-app-yellow shadow-[0_0_20px_rgba(255,184,0,0.2)] group-hover:border-app-yellow/50 transition-colors">
+                <i data-lucide="calendar-check-2" class="w-5 h-5 drop-shadow-[0_0_8px_rgba(255,184,0,0.6)]"></i>
             </div>
-            <span class="text-xl font-extrabold tracking-tight text-white">Schedlix</span>
+            <span class="text-xl font-extrabold tracking-tight text-white drop-shadow-sm">Schedlix</span>
         </a>
         
-        <div class="hidden sm:flex items-center gap-2 bg-app-yellow/10 border border-app-yellow/25 px-4 py-1.5 rounded-full text-[11px] font-mono font-bold text-app-yellow shadow-[0_0_15px_rgba(255,184,0,0.1)]">
+        <div class="hidden sm:flex items-center gap-2 bg-app-yellow/15 border border-app-yellow/30 px-4 py-1.5 rounded-full text-[11px] font-mono font-bold text-app-yellow shadow-[0_0_20px_rgba(255,184,0,0.2)]">
             <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
             <span>30 DAYS FREE TRIAL</span>
         </div>
     </header>
 
-    <!-- Main Content Area: Perfectly Aligned Top & Bottom -->
+    <!-- Main Content Area -->
     <main class="w-full max-w-7xl mx-auto flex-grow px-6 sm:px-10 py-6 lg:py-4 flex flex-col justify-center relative z-20">
         
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-12 xl:gap-x-16 lg:items-stretch">
@@ -169,18 +166,18 @@
             <!-- LEFT COLUMN: Phone (Top) + QR Box (Bottom) -->
             <div class="order-2 lg:order-1 lg:col-span-5 flex flex-col items-center justify-between gap-5 w-full animate-fade-up">
                 
-                <!-- Phone (Aligned to Top) -->
+                <!-- Phone (Top Aligned) -->
                 <div class="phone-mockup shrink-0">
                     <div class="notch"></div>
                     <img src="screenshot.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top opacity-95" onerror="this.src='https://placehold.co/600x1200/10131a/ffb800?text=Schedlix+App&font=Inter'">
                 </div>
 
-                <!-- QR & Download Box (Aligned to Bottom) -->
-                <div class="w-full max-w-[280px] sm:max-w-[305px] bg-app-panel border border-app-border p-3.5 rounded-2xl shadow-xl flex items-center justify-between gap-3.5 shrink-0">
+                <!-- QR & Download Box (Bottom Aligned) -->
+                <div class="w-full max-w-[280px] sm:max-w-[305px] bg-app-panel/90 backdrop-blur-md border border-app-border p-3.5 rounded-2xl shadow-xl flex items-center justify-between gap-3.5 shrink-0">
                     
                     <!-- QR Code -->
                     <a id="qrLink" href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center shrink-0 w-16 group cursor-pointer" title="Scan with Phone Camera">
-                        <div class="bg-white rounded-lg p-1 mb-1.5 shadow group-hover:scale-105 transition-transform duration-200">
+                        <div class="bg-white rounded-lg p-1 mb-1.5 shadow-md group-hover:scale-105 transition-transform duration-200">
                             <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https%3A%2F%2Fapps.apple.com%2Fus%2Fapp%2Fschedlix%2Fid6773795953&color=000000&bgcolor=ffffff" alt="Scan QR Code" class="w-12 h-12 rounded">
                         </div>
                         <span class="font-mono text-[8px] font-bold text-app-muted uppercase tracking-wider text-center leading-none group-hover:text-app-yellow transition-colors">Scan App</span>
@@ -188,7 +185,7 @@
 
                     <!-- Download Action -->
                     <div class="flex flex-col gap-2.5 w-full">
-                        <a id="mainDownloadBtn" href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="w-full bg-app-yellow hover:bg-app-yellowHover text-black font-extrabold py-2.5 px-3 rounded-xl text-center shadow-[0_0_20px_rgba(255,184,0,0.25)] transition-all duration-200 flex items-center justify-center gap-1.5 text-xs">
+                        <a id="mainDownloadBtn" href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="w-full bg-app-yellow hover:bg-app-yellowHover text-black font-extrabold py-2.5 px-3 rounded-xl text-center shadow-[0_0_25px_rgba(255,184,0,0.35)] hover:shadow-[0_0_30px_rgba(255,184,0,0.5)] transition-all duration-200 flex items-center justify-center gap-1.5 text-xs">
                             <i id="mainDownloadIcon" data-lucide="apple" class="w-4 h-4 shrink-0"></i>
                             <span id="mainDownloadText" class="truncate">Download on App Store</span>
                         </a>
@@ -212,7 +209,7 @@
             <!-- RIGHT COLUMN: Text (Top) + Features & Badges (Bottom) -->
             <div class="order-1 lg:order-2 lg:col-span-7 flex flex-col justify-between h-full animate-fade-up">
                 
-                <!-- TOP BLOCK: Aligned with Top of Phone -->
+                <!-- TOP BLOCK (Aligned with Phone Top) -->
                 <div class="flex flex-col">
                     <!-- Overline Tags -->
                     <div class="flex flex-wrap items-center gap-2 mb-3">
@@ -221,10 +218,10 @@
                         </span>
                     </div>
 
-                    <!-- Primary Headline -->
+                    <!-- Primary Headline with Glow -->
                     <h1 class="text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.08] mb-4 text-white tracking-tight">
                         One app.<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow via-[#ffd043] to-app-green inline-block">Infinite control</span><br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow via-[#ffd043] to-app-green inline-block neon-title-glow">Infinite control</span><br>
                         of your time.
                     </h1>
 
@@ -235,13 +232,13 @@
                     </p>
                 </div>
 
-                <!-- BOTTOM BLOCK: Aligned with Bottom of QR/Download Box -->
+                <!-- BOTTOM BLOCK (Aligned with QR/Download Box Bottom) -->
                 <div class="flex flex-col gap-4 mt-8 lg:mt-0">
-                    <!-- Features Grid (Equal height cards) -->
+                    <!-- Features Grid -->
                     <div class="w-full max-w-lg grid grid-cols-1 sm:grid-cols-2 gap-3">
                         
                         <!-- Card 1 -->
-                        <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors">
+                        <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
                             <div class="w-7 h-7 rounded-lg bg-app-yellow/10 flex items-center justify-center shrink-0">
                                 <i data-lucide="calendar" class="w-3.5 h-3.5 text-app-yellow"></i>
                             </div>
@@ -249,7 +246,7 @@
                         </div>
                         
                         <!-- Card 2 -->
-                        <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors">
+                        <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
                             <div class="w-7 h-7 rounded-lg bg-app-green/10 flex items-center justify-center shrink-0">
                                 <i data-lucide="calculator" class="w-3.5 h-3.5 text-app-green"></i>
                             </div>
@@ -257,7 +254,7 @@
                         </div>
                         
                         <!-- Card 3 -->
-                        <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors">
+                        <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
                             <div class="w-7 h-7 rounded-lg bg-app-yellow/10 flex items-center justify-center shrink-0">
                                 <i data-lucide="bell" class="w-3.5 h-3.5 text-app-yellow"></i>
                             </div>
@@ -265,7 +262,7 @@
                         </div>
                         
                         <!-- Card 4 -->
-                        <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors">
+                        <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
                             <div class="w-7 h-7 rounded-lg bg-app-green/10 flex items-center justify-center shrink-0">
                                 <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-app-green"></i>
                             </div>
@@ -275,11 +272,11 @@
 
                     <!-- Trust Badges -->
                     <div class="flex flex-wrap items-center gap-3 font-mono text-[11px] font-semibold text-app-muted uppercase">
-                        <div class="flex items-center gap-2 bg-app-panel border border-app-border pl-1.5 pr-3 py-1 rounded-lg">
+                        <div class="flex items-center gap-2 bg-app-panel/90 backdrop-blur-sm border border-app-border pl-1.5 pr-3 py-1 rounded-lg">
                             <span class="bg-app-yellow text-black px-1.5 py-0.5 rounded font-bold text-[9px]">30 DAYS</span>
                             <span>Free Premium</span>
                         </div>
-                        <div class="flex items-center gap-2 bg-app-panel border border-app-border pl-1.5 pr-3 py-1 rounded-lg">
+                        <div class="flex items-center gap-2 bg-app-panel/90 backdrop-blur-sm border border-app-border pl-1.5 pr-3 py-1 rounded-lg">
                             <span class="bg-app-green text-black px-1.5 py-0.5 rounded font-bold text-[9px]">100%</span>
                             <span>Secure & Private</span>
                         </div>
@@ -291,7 +288,7 @@
         </div>
     </main>
 
-    <!-- Footer Section with Working Links -->
+    <!-- Footer Section -->
     <footer class="w-full max-w-7xl mx-auto px-6 sm:px-10 py-5 shrink-0 relative z-20 flex flex-col md:flex-row items-center justify-between gap-3 font-mono text-[10px] sm:text-[11px] text-app-muted uppercase tracking-wider animate-fade-up">
         <p class="order-2 md:order-1 text-center md:text-left">&copy; 2026 Schedlix. ALL RIGHTS RESERVED</p>
         <div class="order-1 md:order-2 flex flex-wrap items-center justify-center md:justify-end gap-x-5 gap-y-1">
