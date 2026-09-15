@@ -2,10 +2,19 @@
 <html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Schedlix — Create Work Schedules, Analyze Hours & Forecast Income</title>
     <meta name="description" content="Schedlix — create work schedules, analyze your working hours, and forecast your income. Try Premium free for 30 days." />
     
+    <!-- Mobile Status Bar & Theme Color (Matches Dark App Theme) -->
+    <meta name="theme-color" content="#0c0d0e">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0d0e">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0c0d0e">
+    <meta name="color-scheme" content="dark">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-navbutton-color" content="#0c0d0e">
+
     <!-- Favicon / iOS App Icon -->
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
@@ -48,10 +57,26 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+        :root {
+            color-scheme: dark;
+        }
+
+        html {
+            background-color: #0c0d0e;
+            color-scheme: dark;
+        }
+
         html, body {
-            height: 100%;
+            min-height: 100%;
             background-color: #0c0d0e;
             color: #f3f4f6;
+        }
+
+        body {
+            padding-top: max(0.625rem, env(safe-area-inset-top));
+            padding-bottom: max(1rem, env(safe-area-inset-bottom));
+            padding-left: max(1rem, env(safe-area-inset-left));
+            padding-right: max(1rem, env(safe-area-inset-right));
         }
 
         /* Ambient Glow Effects */
@@ -128,7 +153,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between font-sans antialiased selection:bg-app-yellow selection:text-black overflow-x-hidden px-4 pt-2.5 pb-4 sm:p-6 lg:p-8">
+<body class="min-h-screen flex flex-col justify-between font-sans antialiased selection:bg-app-yellow selection:text-black overflow-x-hidden sm:p-6 lg:p-8">
 
     <!-- Ambient Glow Backgrounds -->
     <div class="ambient-glow-yellow"></div>
