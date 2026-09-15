@@ -81,26 +81,28 @@
         .phone-slideshow-container {
             position: relative;
             width: 100%;
-            height: 500px;
+            max-width: 320px;
+            height: 480px;
         }
 
         @media (min-width: 640px) {
             .phone-slideshow-container {
-                height: 560px;
+                max-width: 360px;
+                height: 540px;
             }
         }
 
         @media (min-width: 1024px) {
             .phone-slideshow-container {
-                height: 600px;
-                max-width: 380px;
+                max-width: 340px;
+                height: 520px;
             }
         }
 
         @media (min-width: 1280px) {
             .phone-slideshow-container {
-                height: 650px;
-                max-width: 420px;
+                max-width: 380px;
+                height: 580px;
             }
         }
     </style>
@@ -126,79 +128,91 @@
         </div>
     </header>
 
-    <!-- Main Hero Center Section (Responsive Grid) -->
-    <main class="w-full max-w-6xl mx-auto my-auto flex-grow grid grid-cols-1 lg:grid-cols-12 gap-y-5 lg:gap-x-12 items-center relative z-10 py-1">
+    <!-- Main Hero Center Section -->
+    <main class="w-full max-w-6xl mx-auto my-auto flex-grow flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-14 relative z-10 py-2">
         
-        <!-- 1. Text Block: Top on Mobile, Top-Right on Desktop -->
-        <div class="col-span-1 lg:col-span-7 lg:col-start-6 lg:row-start-1 flex flex-col justify-center">
-            <!-- Tagline -->
+        <!-- Mobile-Only Top Text (Appears First on Mobile) -->
+        <div class="block lg:hidden w-full text-left">
             <p class="font-mono text-app-muted uppercase tracking-[0.2em] text-[11px] font-semibold mb-2">
                 SCHEDULES • HOURS • INCOME • REMINDERS
             </p>
-
-            <!-- Main Headline -->
-            <h1 class="text-3xl sm:text-5xl lg:text-[50px] font-extrabold leading-[1.08] mb-3 text-white tracking-tight">
+            <h1 class="text-3xl sm:text-4xl font-extrabold leading-[1.08] mb-3 text-white tracking-tight">
                 One app.<br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow to-app-green">Infinite control</span><br>
                 of your time.
             </h1>
-
-            <!-- Pitch Description -->
-            <p class="text-gray-300 text-sm sm:text-base leading-relaxed max-w-xl font-normal">
+            <p class="text-gray-300 text-sm leading-relaxed font-normal">
                 Create work schedules, analyze your working hours, and forecast your income. 
                 <span class="text-app-yellow font-semibold">Try Premium free for 30 days.</span>
             </p>
         </div>
 
-        <!-- 2. Phone Mockup Slideshow: 2nd on Mobile (Full Width, 0 Top Margin), Left Column on Desktop -->
-        <div class="col-span-1 lg:col-span-5 lg:col-start-1 lg:row-start-1 lg:row-span-3 flex flex-col items-center justify-center shrink-0 mt-0 pt-0">
-            <div class="phone-slideshow-container flex items-center justify-center relative mt-0 pt-0">
+        <!-- Left Side (Desktop) / 2nd Element (Mobile): Phone Mockup Slideshow -->
+        <div class="w-full lg:w-5/12 flex flex-col items-center justify-center shrink-0 mt-0 pt-0">
+            <div class="phone-slideshow-container flex items-center justify-center relative mt-0 pt-0 mx-auto">
                 <img id="mockup1" src="ENG/mockup1.png" alt="Schedlix App Screen" class="absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]">
                 <img id="mockup2" src="ENG/mockup2.png" alt="Schedlix App Screen" class="absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]">
             </div>
         </div>
 
-        <!-- 3. Store Download Badges + QR Code: 3rd on Mobile, Middle-Right on Desktop -->
-        <div class="col-span-1 lg:col-span-7 lg:col-start-6 lg:row-start-2 flex flex-wrap items-center gap-4 sm:gap-6">
-            <!-- Download Buttons (Compact natural size, no full-width stretch) -->
-            <div class="flex flex-wrap items-center gap-3 shrink-0 w-auto">
-                <!-- App Store Badge -->
-                <a href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-4 py-2.5 rounded-xl transition-all shadow-md hover:scale-[1.02] w-auto">
-                    <svg class="w-6 h-6 fill-current shrink-0" viewBox="0 0 24 24">
-                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
-                    </svg>
-                    <div class="flex flex-col text-left">
-                        <span class="text-[9px] uppercase tracking-wider text-gray-400 leading-none">Download on the</span>
-                        <span class="text-sm font-semibold tracking-tight leading-tight">App Store</span>
-                    </div>
-                </a>
-
-                <!-- Google Play Badge -->
-                <button onclick="alert('Android version coming soon!')" type="button" class="inline-flex items-center gap-3 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-4 py-2.5 rounded-xl transition-all shadow-md hover:scale-[1.02] text-left w-auto">
-                    <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M3.61 1.81L13.19 12 3.61 22.19c-.36-.36-.61-.91-.61-1.59V3.4c0-.68.25-1.23.61-1.59z"/>
-                        <path fill="#FBBC04" d="M16.59 8.61L13.19 12l3.4 3.39 3.87-2.23c1.1-.64 1.1-1.68 0-2.32l-3.87-2.23z"/>
-                        <path fill="#EA4335" d="M13.19 12L3.61 1.81c.5-.5 1.34-.56 2.09-.13l10.89 6.93L13.19 12z"/>
-                        <path fill="#34A853" d="M13.19 12l3.4 3.39-10.89 6.93c-.75.43-1.59.37-2.09-.13L13.19 12z"/>
-                    </svg>
-                    <div class="flex flex-col text-left">
-                        <span class="text-[9px] uppercase tracking-wider text-gray-400 leading-none">GET IT ON</span>
-                        <span class="text-sm font-semibold tracking-tight leading-tight">Google Play</span>
-                    </div>
-                </button>
+        <!-- Right Side: Content Column -->
+        <div class="w-full lg:w-7/12 flex flex-col justify-center">
+            
+            <!-- Desktop-Only Text Header -->
+            <div class="hidden lg:block">
+                <p class="font-mono text-app-muted uppercase tracking-[0.2em] text-[11px] font-semibold mb-2">
+                    SCHEDULES • HOURS • INCOME • REMINDERS
+                </p>
+                <h1 class="text-4xl xl:text-5xl font-extrabold leading-[1.08] mb-3 text-white tracking-tight">
+                    One app.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow to-app-green">Infinite control</span><br>
+                    of your time.
+                </h1>
+                <p class="text-gray-300 text-base leading-relaxed mb-6 max-w-xl font-normal">
+                    Create work schedules, analyze your working hours, and forecast your income. 
+                    <span class="text-app-yellow font-semibold">Try Premium free for 30 days.</span>
+                </p>
             </div>
 
-            <!-- QR Code Box -->
-            <div class="bg-[#f0f0f0] rounded-2xl p-2.5 flex flex-col items-center justify-center w-[115px] shadow-lg hover:scale-105 transition-transform shrink-0 hidden sm:flex">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://schedlix-app.github.io/&color=121212&bgcolor=f0f0f0" alt="QR Code" class="w-16 h-16 mb-1 rounded mix-blend-multiply">
-                <span class="font-mono text-[8px] font-bold text-black uppercase tracking-widest text-center leading-tight">Scan to get app</span>
-            </div>
-        </div>
+            <!-- Download Badges + QR Code -->
+            <div class="flex flex-wrap sm:flex-nowrap items-center gap-4 sm:gap-6 mb-6">
+                <!-- Badges -->
+                <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 shrink-0">
+                    <!-- App Store Button -->
+                    <a href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-4 py-2.5 rounded-xl transition-all shadow-md hover:scale-[1.02]">
+                        <svg class="w-6 h-6 fill-current shrink-0" viewBox="0 0 24 24">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
+                        </svg>
+                        <div class="flex flex-col text-left">
+                            <span class="text-[9px] uppercase tracking-wider text-gray-400 leading-none">Download on the</span>
+                            <span class="text-sm font-semibold tracking-tight leading-tight">App Store</span>
+                        </div>
+                    </a>
 
-        <!-- 4. Features List & Stats: 4th on Mobile, Bottom-Right on Desktop -->
-        <div class="col-span-1 lg:col-span-7 lg:col-start-6 lg:row-start-3 flex flex-col justify-center">
-            <!-- Clean Features List -->
-            <div class="flex flex-col gap-2.5 mb-5 max-w-xl">
+                    <!-- Google Play Button -->
+                    <button onclick="alert('Android version coming soon!')" type="button" class="inline-flex items-center gap-3 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-4 py-2.5 rounded-xl transition-all shadow-md hover:scale-[1.02] text-left">
+                        <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M3.61 1.81L13.19 12 3.61 22.19c-.36-.36-.61-.91-.61-1.59V3.4c0-.68.25-1.23.61-1.59z"/>
+                            <path fill="#FBBC04" d="M16.59 8.61L13.19 12l3.4 3.39 3.87-2.23c1.1-.64 1.1-1.68 0-2.32l-3.87-2.23z"/>
+                            <path fill="#EA4335" d="M13.19 12L3.61 1.81c.5-.5 1.34-.56 2.09-.13l10.89 6.93L13.19 12z"/>
+                            <path fill="#34A853" d="M13.19 12l3.4 3.39-10.89 6.93c-.75.43-1.59.37-2.09-.13L13.19 12z"/>
+                        </svg>
+                        <div class="flex flex-col text-left">
+                            <span class="text-[9px] uppercase tracking-wider text-gray-400 leading-none">GET IT ON</span>
+                            <span class="text-sm font-semibold tracking-tight leading-tight">Google Play</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- QR Code -->
+                <div class="bg-[#f0f0f0] rounded-2xl p-2.5 flex flex-col items-center justify-center w-[115px] shadow-lg hover:scale-105 transition-transform shrink-0 hidden sm:flex">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://schedlix-app.github.io/&color=121212&bgcolor=f0f0f0" alt="QR Code" class="w-16 h-16 mb-1 rounded mix-blend-multiply">
+                    <span class="font-mono text-[8px] font-bold text-black uppercase tracking-widest text-center leading-tight">Scan to get app</span>
+                </div>
+            </div>
+
+            <!-- Features List -->
+            <div class="flex flex-col gap-2.5 mb-6 max-w-xl">
                 <div class="flex items-center gap-3 text-sm text-gray-200">
                     <i data-lucide="calendar" class="w-4 h-4 text-app-yellow shrink-0"></i>
                     <span class="font-medium">10-year auto schedule generation</span>
@@ -221,7 +235,7 @@
                 </div>
             </div>
 
-            <!-- Stats / Trust Badges -->
+            <!-- Stats / Badges -->
             <div class="flex flex-wrap items-center gap-3 font-mono text-xs font-semibold tracking-wider text-app-muted uppercase">
                 <div class="flex items-center gap-2">
                     <span class="bg-app-yellow text-black px-2 py-0.5 rounded font-bold">30 DAYS</span>
@@ -236,8 +250,8 @@
                     <span>Private & iCloud</span>
                 </div>
             </div>
-        </div>
 
+        </div>
     </main>
 
     <!-- Footer -->
