@@ -6,10 +6,8 @@
     <title>Schedlix — Create Work Schedules, Analyze Hours & Forecast Income</title>
     <meta name="description" content="Schedlix — create work schedules, analyze your working hours, and forecast your income. Try Premium free for 30 days." />
     
-    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffb800'><path d='M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14l-2-2 1.41-1.41L9 11.17l4.59-4.58L15 8l-6 6z'/></svg>">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -38,16 +36,13 @@
         }
     </script>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* 100% Silky Smooth, Banding-Free Ambient Neon System */
         html, body {
             min-height: 100%;
             background-color: #07080b;
@@ -60,45 +55,43 @@
             color: #f3f4f6;
         }
 
-        /* Phone Hardware Frame (Clean deep shadow with zero color-banding artifacts) */
         .phone-mockup {
             border: 6px solid #1a1e29;
-            border-radius: 40px;
+            border-radius: 44px;
             overflow: hidden;
             background-color: #000;
             box-shadow: 
                 0 30px 80px -15px rgba(0, 0, 0, 0.95),
                 0 0 0 1px rgba(255, 255, 255, 0.08);
             position: relative;
-            width: 250px;
-            height: 480px;
+            width: 260px;
+            height: 520px;
         }
 
         @media (min-width: 1024px) {
             .phone-mockup {
-                width: 265px;
-                height: 515px;
+                width: 285px;
+                height: 565px;
             }
         }
 
         @media (min-width: 1280px) {
             .phone-mockup {
-                width: 280px;
-                height: 540px;
+                width: 305px;
+                height: 605px;
             }
         }
 
-        /* Hardware Notch */
         .notch {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 84px;
-            height: 20px;
+            width: 86px;
+            height: 22px;
             background-color: #1a1e29;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
+            border-bottom-left-radius: 14px;
+            border-bottom-right-radius: 14px;
             z-index: 20;
             display: flex;
             justify-content: center;
@@ -122,7 +115,6 @@
             border-radius: 50%;
         }
 
-        /* Animation */
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(12px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -136,7 +128,6 @@
 
 <body class="flex flex-col min-h-screen lg:h-screen justify-between font-sans selection:bg-app-yellow selection:text-black antialiased relative">
 
-    <!-- Header Navigation -->
     <header class="w-full max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-10 pt-6 pb-2 shrink-0 z-30 animate-fade-up">
         <a href="#" class="flex items-center gap-3 group">
             <div class="w-10 h-10 bg-app-panel border border-app-border rounded-xl flex items-center justify-center text-app-yellow shadow-md group-hover:border-app-yellow/50 transition-colors">
@@ -151,119 +142,97 @@
         </div>
     </header>
 
-    <!-- Main Content Area: 3 Structured Blocks -->
     <main class="w-full max-w-7xl mx-auto flex-grow px-6 sm:px-10 py-6 lg:py-4 flex flex-col justify-center relative z-20">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-12 xl:gap-x-16 items-center lg:items-stretch">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-12 xl:gap-x-16 items-center">
 
-            <!-- ==================================================== -->
-            <!-- BLOCK 1: Text Content (Mobile: TOP #1 | Desktop: Top Right) -->
-            <!-- ==================================================== -->
-            <div class="order-1 lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:self-start flex flex-col animate-fade-up">
+            <div class="order-2 lg:order-1 lg:col-span-5 flex flex-col items-center justify-center w-full animate-fade-up">
+                <div class="phone-mockup shrink-0">
+                    <div class="notch"></div>
+                    <img src="screenshot.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top opacity-95" onerror="this.src='https://placehold.co/600x1200/10131a/ffb800?text=Schedlix+App&font=Inter'">
+                </div>
+            </div>
+
+            <div class="order-1 lg:order-2 lg:col-span-7 flex flex-col justify-center animate-fade-up">
                 
-                <!-- Overline Tags -->
-                <div class="flex flex-wrap items-center gap-2 mb-3">
+                <div class="flex flex-wrap items-center gap-2 mb-2">
                     <span class="font-mono text-app-muted uppercase tracking-[0.2em] text-[11px] font-bold">
                         SCHEDULES <span class="text-app-border mx-1">•</span> HOURS <span class="text-app-border mx-1">•</span> INCOME <span class="text-app-border mx-1">•</span> REMINDERS
                     </span>
                 </div>
 
-                <!-- Primary Headline -->
-                <h1 class="text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.08] mb-4 text-white tracking-tight">
+                <h1 class="text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.08] mb-3 text-white tracking-tight">
                     One app.<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow via-[#ffd043] to-app-green inline-block">Infinite control</span><br>
                     of your time.
                 </h1>
 
-                <!-- App Pitch / Description -->
-                <p class="text-gray-300 text-sm sm:text-base leading-relaxed max-w-xl font-normal">
+                <p class="text-gray-300 text-sm sm:text-base leading-relaxed max-w-xl font-normal mb-5">
                     Create work schedules, analyze your working hours, and forecast your income. 
                     <span class="text-app-yellow font-semibold whitespace-nowrap">Try Premium free for 30 days.</span>
                 </p>
-            </div>
 
-            <!-- ==================================================== -->
-            <!-- BLOCK 2: Phone Mockup + QR / Download (Mobile: MIDDLE #2 | Desktop: Left Column) -->
-            <!-- ==================================================== -->
-            <div class="order-2 lg:col-span-5 lg:col-start-1 lg:row-span-2 flex flex-col items-center justify-between gap-5 w-full animate-fade-up">
-                
-                <!-- Phone (Top Aligned on Desktop) -->
-                <div class="phone-mockup shrink-0">
-                    <div class="notch"></div>
-                    <img src="screenshot.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top opacity-95" onerror="this.src='https://placehold.co/600x1200/10131a/ffb800?text=Schedlix+App&font=Inter'">
-                </div>
-
-                <!-- QR & Download Box (Bottom Aligned on Desktop) -->
-                <div class="w-full max-w-[280px] sm:max-w-[305px] bg-app-panel/90 backdrop-blur-md border border-app-border p-3.5 rounded-2xl shadow-xl flex items-center justify-between gap-3.5 shrink-0">
+                <div class="w-full max-w-lg bg-app-panel/90 backdrop-blur-md border border-app-border p-4 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center gap-5 mb-5">
                     
-                    <!-- Scan App / QR -->
-                    <a id="qrLink" href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center shrink-0 w-16 group cursor-pointer" title="Scan with Phone Camera">
-                        <div class="bg-white rounded-lg p-1 mb-1.5 shadow-md group-hover:scale-105 transition-transform duration-200">
-                            <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https%3A%2F%2Fapps.apple.com%2Fus%2Fapp%2Fschedlix%2Fid6773795953&color=000000&bgcolor=ffffff" alt="Scan QR Code" class="w-12 h-12 rounded">
+                    <a id="qrLink" href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center shrink-0 group cursor-pointer" title="Scan with Phone Camera">
+                        <div class="bg-white rounded-xl p-1.5 shadow-md group-hover:scale-105 transition-transform duration-200">
+                            <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fapps.apple.com%2Fus%2Fapp%2Fschedlix%2Fid6773795953&color=000000&bgcolor=ffffff" alt="Scan QR Code" class="w-20 h-20 rounded-lg">
                         </div>
-                        <span class="font-mono text-[8px] font-bold text-app-muted uppercase tracking-wider text-center leading-none group-hover:text-app-yellow transition-colors">Scan App</span>
+                        <span class="font-mono text-[9px] font-bold text-app-muted uppercase tracking-wider text-center mt-1.5 group-hover:text-app-yellow transition-colors">Scan App</span>
                     </a>
 
-                    <!-- Download Action Buttons -->
-                    <div class="flex flex-col gap-2.5 w-full">
-                        <a id="mainDownloadBtn" href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="w-full bg-app-yellow hover:bg-app-yellowHover text-black font-extrabold py-2.5 px-3 rounded-xl text-center shadow-lg shadow-app-yellow/20 transition-all duration-200 flex items-center justify-center gap-1.5 text-xs">
-                            <i id="mainDownloadIcon" data-lucide="apple" class="w-4 h-4 shrink-0"></i>
-                            <span id="mainDownloadText" class="truncate">Download on App Store</span>
+                    <div class="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-2.5 w-full">
+                        
+                        <a href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center gap-3 bg-black hover:bg-[#111318] text-white border border-white/20 hover:border-white/40 px-3.5 py-2.5 rounded-xl transition-all shadow-md group">
+                            <svg class="w-6 h-6 fill-current shrink-0" viewBox="0 0 170 170">
+                                <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.79-11.67-14.24-5.99-9.46-10.77-20.27-14.34-32.43-3.57-12.16-5.35-23.71-5.35-34.65 0-15.54 3.97-28.43 11.91-38.66 7.94-10.23 18.06-15.52 30.34-15.88 4.8 0 10.3 1.3 16.51 3.91 6.21 2.61 10.14 3.96 11.78 4.07 1.42 0 5.46-1.4 12.13-4.18 6.67-2.78 12.38-4.01 17.14-3.68 13.3.65 23.83 5.48 31.57 14.51-11.55 7-17.21 16.56-17 28.67.22 9.47 3.82 17.48 10.8 24.03 6.98 6.55 15.34 10.26 25.09 11.13-2.18 6.64-4.8 13.06-7.85 19.26zM119.22 33.64c0-7.39 2.64-14.38 7.92-20.98 5.28-6.6 11.89-10.86 19.82-12.77.33 1.42.49 2.89.49 4.41 0 7.39-2.73 14.53-8.18 21.42-5.45 6.89-12.05 11.08-19.81 12.56-.11-1.42-.24-3.02-.24-4.64z"/>
+                            </svg>
+                            <div class="flex flex-col text-left leading-none">
+                                <span class="text-[8px] uppercase tracking-wider text-gray-400 font-medium mb-0.5">Download on the</span>
+                                <span class="text-[13px] font-bold text-white tracking-tight">App Store</span>
+                            </div>
                         </a>
 
-                        <div class="flex justify-center items-center gap-3 text-app-muted">
-                            <a href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer" title="App Store">
-                                <i data-lucide="apple" class="w-3.5 h-3.5 text-app-yellow"></i>
-                                <span class="text-[10px] font-mono font-bold uppercase text-gray-300">iOS</span>
-                            </a>
-                            <div class="w-px h-2.5 bg-app-border"></div>
-                            <button onclick="handleAndroidClick(event)" class="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer" title="Google Play">
-                                <i data-lucide="smartphone" class="w-3.5 h-3.5 text-app-green"></i>
-                                <span class="text-[10px] font-mono font-bold uppercase text-gray-300">Android</span>
-                            </button>
-                        </div>
+                        <button onclick="handleAndroidClick(event)" class="flex-1 flex items-center gap-3 bg-black hover:bg-[#111318] text-white border border-white/20 hover:border-white/40 px-3.5 py-2.5 rounded-xl transition-all shadow-md group">
+                            <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+                                <path fill="#EA4335" d="M3.61 1.81L13.12 11.32 5.09 19.35z"/>
+                                <path fill="#4285F4" d="M16.92 7.51L5.09 19.35 13.12 11.32z"/>
+                                <path fill="#FBBC04" d="M20.25 10.87l-3.33-3.36-3.8 3.81 3.8 3.81 3.33-3.36c.55-.55.55-1.35 0-1.9z"/>
+                                <path fill="#34A853" d="M3.61 1.81c-.37.52-.61 1.18-.61 1.94v16.5c0 .76.24 1.42.61 1.94l1.48-1.48L13.12 11.32 5.09 3.29z"/>
+                            </svg>
+                            <div class="flex flex-col text-left leading-none">
+                                <span class="text-[8px] uppercase tracking-wider text-gray-400 font-medium mb-0.5">GET IT ON</span>
+                                <span class="text-[13px] font-bold text-white tracking-tight">Google Play</span>
+                            </div>
+                        </button>
+
                     </div>
                 </div>
 
-            </div>
-
-            <!-- ==================================================== -->
-            <!-- BLOCK 3: Features & Badges (Mobile: BOTTOM #3 UNDER SCREENS | Desktop: Bottom Right) -->
-            <!-- ==================================================== -->
-            <div class="order-3 lg:col-span-7 lg:col-start-6 lg:row-start-2 lg:self-end flex flex-col gap-4 animate-fade-up">
-                
-                <!-- Divider for Mobile View -->
-                <div class="w-full h-px bg-app-border/40 mb-2 lg:hidden"></div>
-
-                <!-- Features Grid (Fixed uniform height) -->
-                <div class="w-full max-w-lg grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="w-full max-w-lg grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-5">
                     
-                    <!-- Feature 1 -->
-                    <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
+                    <div class="h-[50px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
                         <div class="w-7 h-7 rounded-lg bg-app-yellow/10 flex items-center justify-center shrink-0">
                             <i data-lucide="calendar" class="w-3.5 h-3.5 text-app-yellow"></i>
                         </div>
                         <span class="font-medium tracking-wide leading-snug">10-year auto schedule</span>
                     </div>
                     
-                    <!-- Feature 2 -->
-                    <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
+                    <div class="h-[50px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
                         <div class="w-7 h-7 rounded-lg bg-app-green/10 flex items-center justify-center shrink-0">
                             <i data-lucide="calculator" class="w-3.5 h-3.5 text-app-green"></i>
                         </div>
                         <span class="font-medium tracking-wide leading-snug">Income & hours forecasting</span>
                     </div>
                     
-                    <!-- Feature 3 -->
-                    <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
+                    <div class="h-[50px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
                         <div class="w-7 h-7 rounded-lg bg-app-yellow/10 flex items-center justify-center shrink-0">
                             <i data-lucide="bell" class="w-3.5 h-3.5 text-app-yellow"></i>
                         </div>
                         <span class="font-medium tracking-wide leading-snug">Adaptive shift reminders</span>
                     </div>
                     
-                    <!-- Feature 4 -->
-                    <div class="h-[52px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
+                    <div class="h-[50px] flex items-center gap-3 text-xs sm:text-sm text-gray-200 bg-app-panel/90 backdrop-blur-sm border border-app-border px-3.5 rounded-xl hover:bg-app-panelHover transition-colors shadow-sm">
                         <div class="w-7 h-7 rounded-lg bg-app-green/10 flex items-center justify-center shrink-0">
                             <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-app-green"></i>
                         </div>
@@ -271,7 +240,6 @@
                     </div>
                 </div>
 
-                <!-- Trust Badges -->
                 <div class="flex flex-wrap items-center gap-3 font-mono text-[11px] font-semibold text-app-muted uppercase">
                     <div class="flex items-center gap-2 bg-app-panel/90 backdrop-blur-sm border border-app-border pl-1.5 pr-3 py-1 rounded-lg">
                         <span class="bg-app-yellow text-black px-1.5 py-0.5 rounded font-bold text-[9px]">30 DAYS</span>
@@ -288,7 +256,6 @@
         </div>
     </main>
 
-    <!-- Footer Section with Working Links -->
     <footer class="w-full max-w-7xl mx-auto px-6 sm:px-10 py-5 shrink-0 relative z-20 flex flex-col md:flex-row items-center justify-between gap-3 font-mono text-[10px] sm:text-[11px] text-app-muted uppercase tracking-wider animate-fade-up">
         <p class="order-2 md:order-1 text-center md:text-left">&copy; 2026 Schedlix. ALL RIGHTS RESERVED</p>
         <div class="order-1 md:order-2 flex flex-wrap items-center justify-center md:justify-end gap-x-5 gap-y-1">
@@ -298,60 +265,25 @@
         </div>
     </footer>
 
-    <!-- Smart OS Detection & Redirection Script -->
     <script>
         const IOS_APP_URL = "https://apps.apple.com/us/app/schedlix/id6773795953";
-        const ANDROID_APP_URL = ""; // Add your Google Play Store URL here once available
+        const ANDROID_APP_URL = "";
 
-        // Detect user's Operating System
         function getMobileOperatingSystem() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            // iOS Detection (iPhone, iPad, iPod)
             if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 return 'iOS';
             }
-            // iPad on iOS 13+ detection
             if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) {
                 return 'iOS';
             }
-            // Android Detection
             if (/android/i.test(userAgent)) {
                 return 'Android';
             }
             return 'Desktop';
         }
 
-        // Configure download button based on user device
-        function setupSmartDownloadButton() {
-            const os = getMobileOperatingSystem();
-            const btn = document.getElementById('mainDownloadBtn');
-            const text = document.getElementById('mainDownloadText');
-            const icon = document.getElementById('mainDownloadIcon');
-
-            if (os === 'iOS') {
-                btn.href = IOS_APP_URL;
-                text.textContent = 'Download on App Store';
-                icon.setAttribute('data-lucide', 'apple');
-            } else if (os === 'Android') {
-                if (ANDROID_APP_URL) {
-                    btn.href = ANDROID_APP_URL;
-                    text.textContent = 'Get it on Google Play';
-                } else {
-                    btn.href = '#';
-                    btn.onclick = handleAndroidClick;
-                    text.textContent = 'Android App (Coming Soon)';
-                }
-                icon.setAttribute('data-lucide', 'smartphone');
-            } else {
-                // Desktop fallback
-                btn.href = IOS_APP_URL;
-                text.textContent = 'Download on App Store';
-                icon.setAttribute('data-lucide', 'apple');
-            }
-        }
-
-        // Handle Android click if Google Play version is not released yet
         function handleAndroidClick(e) {
             if (!ANDROID_APP_URL) {
                 if (e) e.preventDefault();
@@ -361,7 +293,6 @@
             }
         }
 
-        // Smart Redirect (e.g. when QR code leads to: ?redirect=app)
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('redirect') === 'app') {
             const os = getMobileOperatingSystem();
@@ -372,8 +303,6 @@
             }
         }
 
-        // Initialize
-        setupSmartDownloadButton();
         lucide.createIcons();
     </script>
 </body>
