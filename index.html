@@ -43,7 +43,19 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        html, body {
+        html {
+            overflow-x: hidden;
+            background-color: #07080b;
+        }
+
+        @media (min-width: 1024px) {
+            html, body {
+                height: 100vh;
+                overflow-y: hidden; /* Stops layout shift and blink on load */
+            }
+        }
+
+        body {
             min-height: 100%;
             background-color: #07080b;
             background-image: 
@@ -115,20 +127,21 @@
             border-radius: 50%;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(12px); }
-            100% { opacity: 1; transform: translateY(0); }
+        /* Smooth zero-shift entrance */
+        @keyframes fadeInSafe {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
         
         .animate-fade-up {
-            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeInSafe 0.5s ease-out forwards;
         }
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen justify-between font-sans selection:bg-app-yellow selection:text-black antialiased relative">
+<body class="flex flex-col min-h-screen lg:h-screen lg:overflow-hidden justify-between font-sans selection:bg-app-yellow selection:text-black antialiased relative">
 
-    <header class="w-full max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-10 pt-6 pb-2 shrink-0 z-30 animate-fade-up">
+    <header class="w-full max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-10 pt-4 pb-2 shrink-0 z-30 animate-fade-up">
         <a href="#" class="flex items-center gap-3 group">
             <div class="w-10 h-10 bg-app-panel border border-app-border rounded-xl flex items-center justify-center text-app-yellow shadow-md group-hover:border-app-yellow/50 transition-colors">
                 <i data-lucide="calendar-check-2" class="w-5 h-5"></i>
@@ -142,19 +155,19 @@
         </div>
     </header>
 
-    <main class="w-full max-w-7xl mx-auto flex-grow px-6 sm:px-10 py-6 lg:py-10 flex flex-col justify-center relative z-20">
+    <main class="w-full max-w-7xl mx-auto flex-grow px-6 sm:px-10 py-2 flex flex-col justify-center relative z-20">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-y-11 lg:gap-x-14 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-y-10 lg:gap-x-14 items-start">
 
             <!-- 1. TEXT CONTENT BLOCK (Mobile: 1st | Desktop: Row 1 Right) -->
             <div class="order-1 lg:col-span-7 lg:col-start-6 lg:row-start-1 flex flex-col animate-fade-up">
-                <div class="flex flex-wrap items-center gap-2 mb-3">
+                <div class="flex flex-wrap items-center gap-2 mb-2.5">
                     <span class="font-mono text-app-muted uppercase tracking-[0.2em] text-[11px] font-bold">
                         SCHEDULES <span class="text-app-border mx-1">•</span> HOURS <span class="text-app-border mx-1">•</span> INCOME <span class="text-app-border mx-1">•</span> REMINDERS
                     </span>
                 </div>
 
-                <h1 class="text-5xl sm:text-6xl xl:text-7xl font-extrabold leading-[1.04] mb-4 text-white tracking-tight">
+                <h1 class="text-5xl sm:text-6xl xl:text-7xl font-extrabold leading-[1.04] mb-3.5 text-white tracking-tight">
                     One app.<br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow via-[#ffd043] to-app-green inline-block">Infinite control</span><br>
                     of your time.
@@ -214,7 +227,7 @@
 
             <!-- 4. FEATURES & BADGES (Mobile: 4th | Desktop: Row 3 Right) -->
             <div class="order-4 lg:col-span-7 lg:col-start-6 lg:row-start-3 flex flex-col animate-fade-up">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3.5 max-w-lg mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-lg mb-5">
                     <div class="flex items-center gap-3">
                         <div class="w-5 h-5 rounded-full bg-app-yellow/10 flex items-center justify-center shrink-0">
                             <i data-lucide="check" class="w-3.5 h-3.5 text-app-yellow"></i>
@@ -244,13 +257,13 @@
                     </div>
                 </div>
 
-                <div class="flex flex-wrap items-center gap-3 font-mono text-xs font-semibold text-app-muted uppercase">
+                <div class="flex flex-wrap items-center gap-3 font-mono text-[11px] font-semibold text-app-muted uppercase">
                     <div class="flex items-center gap-2 bg-app-panel/90 backdrop-blur-sm border border-app-border pl-1.5 pr-3 py-1.5 rounded-lg">
-                        <span class="bg-app-yellow text-black px-1.5 py-0.5 rounded font-bold text-[10px]">30 DAYS</span>
+                        <span class="bg-app-yellow text-black px-1.5 py-0.5 rounded font-bold text-[9px]">30 DAYS</span>
                         <span>Free Premium</span>
                     </div>
                     <div class="flex items-center gap-2 bg-app-panel/90 backdrop-blur-sm border border-app-border pl-1.5 pr-3 py-1.5 rounded-lg">
-                        <span class="bg-app-green text-black px-1.5 py-0.5 rounded font-bold text-[10px]">100%</span>
+                        <span class="bg-app-green text-black px-1.5 py-0.5 rounded font-bold text-[9px]">100%</span>
                         <span>Secure & Private</span>
                     </div>
                 </div>
@@ -259,7 +272,7 @@
         </div>
     </main>
 
-    <footer class="w-full max-w-7xl mx-auto px-6 sm:px-10 py-5 shrink-0 relative z-20 flex flex-col md:flex-row items-center justify-between gap-3 font-mono text-[10px] sm:text-[11px] text-app-muted uppercase tracking-wider animate-fade-up">
+    <footer class="w-full max-w-7xl mx-auto px-6 sm:px-10 py-3 shrink-0 relative z-20 flex flex-col md:flex-row items-center justify-between gap-2 font-mono text-[10px] sm:text-[11px] text-app-muted uppercase tracking-wider animate-fade-up">
         <p class="order-2 md:order-1 text-center md:text-left">&copy; 2026 Schedlix. ALL RIGHTS RESERVED</p>
         <div class="order-1 md:order-2 flex flex-wrap items-center justify-center md:justify-end gap-x-5 gap-y-1">
             <a href="https://schedlix-app.github.io/legal/privacy.html" class="hover:text-white hover:underline underline-offset-4 transition-colors">PRIVACY POLICY</a>
