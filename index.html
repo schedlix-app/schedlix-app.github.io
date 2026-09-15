@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedlix - Complete Control of Your Time</title>
     
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffb800'><path d='M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14l-2-2 1.41-1.41L9 11.17l4.59-4.58L15 8l-6 6z'/></svg>">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -48,7 +51,6 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Glow Effects mimicking the Sofascore background but in Schedlix colors */
         .ambient-glow-yellow {
             position: fixed;
             top: -10%;
@@ -71,7 +73,6 @@
             pointer-events: none;
         }
 
-        /* Phone Mockup Styling */
         .phone-container {
             position: relative;
             z-index: 10;
@@ -86,10 +87,11 @@
             box-shadow: 
                 0 25px 50px -12px rgba(0, 0, 0, 0.8),
                 0 0 0 1px rgba(255,255,255,0.1),
-                inset 0 0 0 4px #000; /* Inner bezel */
+                inset 0 0 0 4px #000;
             position: relative;
             width: 300px;
-            height: 620px;
+            max-width: 85vw;
+            height: 600px;
             transform: rotateY(-5deg) rotateX(2deg);
             transition: transform 0.5s ease;
         }
@@ -98,31 +100,23 @@
             transform: rotateY(0deg) rotateX(0deg);
         }
 
-        /* Dynamic Notch */
         .notch {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 25px;
+            width: 110px;
+            height: 22px;
             background-color: #1a1a1a;
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
+            border-bottom-left-radius: 14px;
+            border-bottom-right-radius: 14px;
             z-index: 20;
-        }
-
-        .separator-line {
-            height: 1px;
-            background: linear-gradient(90deg, rgba(42,42,42,1) 0%, rgba(42,42,42,0) 100%);
-            width: 100%;
-            margin: 2rem 0;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans antialiased selection:bg-app-yellow selection:text-black">
 
-    <!-- Background Elements -->
+    <!-- Background Ambient Glow -->
     <div class="ambient-glow-yellow"></div>
     <div class="ambient-glow-green"></div>
 
@@ -134,12 +128,12 @@
                 <div class="phone-mockup">
                     <div class="notch"></div>
                     <!-- App Screenshot -->
-                    <img src="image_30278e.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/400x800/1a1a1a/ffb800?text=App+Screenshot'">
+                    <img src="screenshot.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/400x800/181a20/ffb800?text=Schedlix+App'">
                 </div>
             </div>
         </div>
 
-        <!-- Right Side: Content (Sofascore Style) -->
+        <!-- Right Side: Content -->
         <div class="w-full lg:w-7/12 flex flex-col order-1 lg:order-2">
             
             <!-- Logo Section -->
@@ -172,10 +166,12 @@
                     
                     <!-- Ratings -->
                     <div class="flex flex-col gap-3 font-mono text-sm">
-                        <!-- Play Store -->
+                        <!-- Play Store Rating -->
                         <div class="flex items-center gap-3">
                             <span class="text-white font-bold w-6">4.7</span>
-                            <i data-lucide="play" class="w-4 h-4 text-app-muted fill-current"></i>
+                            <svg class="w-4 h-4 fill-current text-app-muted" viewBox="0 0 24 24">
+                                <path d="M4 3.5v17c0 .6.6.9 1.1.6l14.4-8.5c.5-.3.5-1 0-1.3L5.1 2.8c-.5-.3-1.1 0-1.1.7z"/>
+                            </svg>
                             <div class="flex text-app-yellow gap-0.5">
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
@@ -184,10 +180,12 @@
                                 <i data-lucide="star-half" class="w-3.5 h-3.5 fill-current"></i>
                             </div>
                         </div>
-                        <!-- App Store -->
+                        <!-- App Store Rating -->
                         <div class="flex items-center gap-3">
                             <span class="text-white font-bold w-6">4.9</span>
-                            <i data-lucide="apple" class="w-4 h-4 text-app-muted fill-current"></i>
+                            <svg class="w-4 h-4 fill-current text-app-muted" viewBox="0 0 24 24">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
+                            </svg>
                             <div class="flex text-app-yellow gap-0.5">
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
@@ -198,9 +196,9 @@
                         </div>
                     </div>
 
-                    <!-- QR Code (Styled like Sofascore's light box) -->
-                    <div class="bg-[#e5e5e5] rounded-[20px] p-4 flex flex-col items-center justify-center w-[140px] shadow-xl">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://example.com/download&color=121212&bgcolor=e5e5e5" alt="QR Code" class="w-24 h-24 mb-3 rounded-md mix-blend-multiply">
+                    <!-- QR Code -->
+                    <div class="bg-[#e5e5e5] rounded-[20px] p-4 flex flex-col items-center justify-center w-[140px] shadow-xl hover:scale-105 transition-transform">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://schedlix-app.github.io/&color=121212&bgcolor=e5e5e5" alt="QR Code" class="w-24 h-24 mb-3 rounded-md mix-blend-multiply">
                         <span class="font-mono text-[9px] font-bold text-black uppercase tracking-widest text-center leading-tight">Scan to download</span>
                     </div>
                 </div>
@@ -233,18 +231,18 @@
             <!-- Separator -->
             <div class="w-full h-px bg-app-border mb-8"></div>
 
-            <!-- Badges / Stats Block (Sofascore Style) -->
+            <!-- Badges / Stats Block -->
             <div class="flex flex-wrap items-center gap-6 font-mono text-xs sm:text-sm font-semibold tracking-wider text-app-muted uppercase">
                 <div class="flex items-center gap-3">
-                    <span class="bg-app-yellow text-black px-2 py-1 rounded">24/7</span>
+                    <span class="bg-app-yellow text-black px-2.5 py-1 rounded-md font-bold">24/7</span>
                     <span>Availability</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <span class="bg-app-green text-black px-2 py-1 rounded">1000+</span>
+                    <span class="bg-app-green text-black px-2.5 py-1 rounded-md font-bold">1000+</span>
                     <span>Shifts logged</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <span class="bg-app-yellow text-black px-2 py-1 rounded">10K+</span>
+                    <span class="bg-app-yellow text-black px-2.5 py-1 rounded-md font-bold">10K+</span>
                     <span>Users yearly</span>
                 </div>
             </div>
@@ -252,14 +250,14 @@
         </div>
     </main>
 
+    <!-- Footer -->
     <footer class="w-full py-8 text-center sm:text-left container mx-auto px-6 relative z-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 font-mono text-xs text-app-muted uppercase tracking-widest mt-auto pb-12">
-        <p>&copy;2026, ALL RIGHTS RESERVED</p>
+        <p>&copy; 2026 Schedlix. ALL RIGHTS RESERVED</p>
         <span class="hidden sm:inline-block w-1 h-1 bg-app-border rounded-full mx-2"></span>
-        <a href="#" class="hover:text-white transition-colors duration-200">PRIVACY POLICY</a>
+        <a href="/legal/privacy.html" class="hover:text-white transition-colors duration-200">PRIVACY POLICY</a>
     </footer>
 
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
     </script>
 </body>
