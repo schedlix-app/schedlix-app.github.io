@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en" class="h-full antialiased">
 <head>
@@ -67,64 +68,36 @@
             color: #f3f4f6;
         }
 
-        .phone-mockup {
-            border: 7px solid #1a1e29;
-            border-radius: 46px;
-            overflow: hidden;
-            background-color: #000;
-            box-shadow: 
-                0 35px 90px -15px rgba(0, 0, 0, 0.95),
-                0 0 0 1px rgba(255, 255, 255, 0.08);
+        .phone-display-container {
             position: relative;
             width: 270px;
-            height: 540px;
+            height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         @media (min-width: 1024px) {
-            .phone-mockup {
+            .phone-display-container {
                 width: 320px;
-                height: 640px;
+                height: 650px;
             }
         }
 
         @media (min-width: 1280px) {
-            .phone-mockup {
-                width: 340px;
-                height: 680px;
+            .phone-display-container {
+                width: 345px;
+                height: 700px;
             }
         }
 
-        .notch {
+        .phone-slide-img {
             position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90px;
-            height: 24px;
-            background-color: #1a1e29;
-            border-bottom-left-radius: 14px;
-            border-bottom-right-radius: 14px;
-            z-index: 20;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .notch::before {
-            content: '';
-            width: 7px;
-            height: 7px;
-            background: #07080b;
-            border-radius: 50%;
-        }
-        
-        .notch::after {
-            content: '';
-            width: 4px;
-            height: 4px;
-            background: rgba(52, 211, 153, 0.8);
-            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 600ms ease-in-out;
+            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.85));
         }
 
         @keyframes fadeInSafe {
@@ -178,11 +151,11 @@
                 </p>
             </div>
 
-            <!-- 2. SMARTPHONE MOCKUP (Mobile: 2nd | Desktop: Left Column spanning all rows) -->
+            <!-- 2. REALISTIC SMARTPHONE SLIDESHOW (Mobile: 2nd | Desktop: Left Column) -->
             <div class="order-2 lg:col-span-5 lg:col-start-1 lg:row-start-1 lg:row-span-3 flex flex-col items-center justify-start w-full animate-fade-up">
-                <div class="phone-mockup shrink-0">
-                    <div class="notch"></div>
-                    <img src="screenshot.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top opacity-95" onerror="this.src='https://placehold.co/600x1200/10131a/ffb800?text=Schedlix+App&font=Inter'">
+                <div class="phone-display-container shrink-0">
+                    <img id="phoneMockup1" src="ENG/mockup1.png" alt="Schedlix App Mockup" class="phone-slide-img" style="opacity: 1; z-index: 3;" onerror="this.src='https://placehold.co/600x1200/10131a/ffb800?text=Schedlix+App&font=Inter'">
+                    <img id="phoneMockup2" src="ENG/mockup2.png" alt="Schedlix App Mockup" class="phone-slide-img" style="opacity: 0; z-index: 2;" onerror="this.src='https://placehold.co/600x1200/10131a/ffb800?text=Schedlix+App&font=Inter'">
                 </div>
             </div>
 
@@ -284,20 +257,45 @@
         const IOS_APP_URL = "https://apps.apple.com/us/app/schedlix/id6773795953";
         const ANDROID_APP_URL = "";
 
-        function getMobileOperatingSystem() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        // 10 mockups inside ENG folder
+        const phoneImages = [
+            'ENG/mockup1.png',
+            'ENG/mockup2.png',
+            'ENG/mockup3.png',
+            'ENG/mockup4.png',
+            'ENG/mockup5.png',
+            'ENG/mockup6.png',
+            'ENG/mockup7.png',
+            'ENG/mockup8.png',
+            'ENG/mockup9.png',
+            'ENG/mockup10.png'
+        ];
 
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                return 'iOS';
+        let currentImageIndex = 0;
+        let showingFirst = true;
+        const img1 = document.getElementById('phoneMockup1');
+        const img2 = document.getElementById('phoneMockup2');
+
+        // Smooth crossfade slideshow (every 2.8s)
+        setInterval(() => {
+            currentImageIndex = (currentImageIndex + 1) % phoneImages.length;
+            const nextSrc = phoneImages[currentImageIndex];
+
+            if (showingFirst) {
+                img2.style.zIndex = 3;
+                img1.style.zIndex = 2;
+                img2.src = nextSrc;
+                img2.style.opacity = '1';
+                setTimeout(() => { img1.style.opacity = '0'; }, 600);
+            } else {
+                img1.style.zIndex = 3;
+                img2.style.zIndex = 2;
+                img1.src = nextSrc;
+                img1.style.opacity = '1';
+                setTimeout(() => { img2.style.opacity = '0'; }, 600);
             }
-            if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) {
-                return 'iOS';
-            }
-            if (/android/i.test(userAgent)) {
-                return 'Android';
-            }
-            return 'Desktop';
-        }
+            showingFirst = !showingFirst;
+        }, 2800);
 
         function handleAndroidClick(e) {
             if (!ANDROID_APP_URL) {
@@ -310,8 +308,9 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('redirect') === 'app') {
-            const os = getMobileOperatingSystem();
-            if (os === 'Android' && ANDROID_APP_URL) {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isAndroid = /android/i.test(userAgent);
+            if (isAndroid && ANDROID_APP_URL) {
                 window.location.href = ANDROID_APP_URL;
             } else {
                 window.location.href = IOS_APP_URL;
@@ -322,3 +321,4 @@
     </script>
 </body>
 </html>
+```
