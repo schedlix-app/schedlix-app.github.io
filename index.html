@@ -77,46 +77,58 @@
             pointer-events: none;
         }
 
-        /* Phone Slideshow Responsive Heights */
+        /* Phone Slideshow Responsive Dimensions with Exact Aspect Ratio */
         .phone-slideshow-container {
             position: relative;
             width: 100%;
-            max-width: 310px;
-            height: 480px;
-        }
-
-        @media (min-width: 480px) {
-            .phone-slideshow-container {
-                max-width: 350px;
-                height: 540px;
-            }
+            max-width: 100%;
+            aspect-ratio: 1114 / 2004;
+            filter: drop-shadow(0 20px 45px rgba(0,0,0,0.85));
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
         @media (min-width: 640px) {
             .phone-slideshow-container {
-                max-width: 390px;
-                height: 600px;
+                max-width: 460px;
             }
         }
 
         @media (min-width: 1024px) {
             .phone-slideshow-container {
-                max-width: 430px;
-                height: 650px;
-                max-height: calc(100vh - 170px);
+                max-width: 380px;
+                max-height: calc(100vh - 180px);
             }
         }
 
         @media (min-width: 1280px) {
             .phone-slideshow-container {
-                max-width: 480px;
-                height: 720px;
-                max-height: calc(100vh - 170px);
+                max-width: 410px;
+                max-height: calc(100vh - 180px);
             }
+        }
+
+        /* Pure Native Sharp Image Rendering */
+        .mockup-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: top;
+        }
+
+        /* Shimmer Skeleton Animation */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+            animation: shimmer 2.2s infinite ease-in-out;
         }
     </style>
 </head>
-<body class="min-h-full lg:h-screen flex flex-col justify-between font-sans antialiased selection:bg-app-yellow selection:text-black overflow-x-hidden lg:overflow-hidden p-4 sm:p-6 lg:p-8">
+<body class="min-h-screen flex flex-col justify-between font-sans antialiased selection:bg-app-yellow selection:text-black overflow-x-hidden p-4 sm:p-6 lg:p-8">
 
     <!-- Ambient Glow Backgrounds -->
     <div class="ambient-glow-yellow"></div>
@@ -138,30 +150,69 @@
     </header>
 
     <!-- Main Hero Center Section -->
-    <main class="w-full max-w-6xl xl:max-w-7xl mx-auto my-auto flex-grow flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-14 relative z-10 py-2 sm:py-4 lg:py-2">
+    <main class="w-full max-w-6xl xl:max-w-7xl mx-auto my-auto flex-grow flex flex-col lg:flex-row items-center justify-center gap-3 sm:gap-6 lg:gap-14 relative z-10 py-1 sm:py-4 lg:py-2">
         
         <!-- Mobile-Only Top Text (Appears First on Mobile) -->
         <div class="block lg:hidden w-full text-left">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-app-panel/90 border border-app-border text-xs font-mono text-gray-300 uppercase tracking-wide mb-3.5 shadow-sm">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-app-panel/90 border border-app-border text-xs font-mono text-gray-300 uppercase tracking-wide mb-3.5 shadow-sm">
                 <span class="w-2 h-2 rounded-full bg-app-yellow animate-pulse shrink-0"></span>
                 <span>Schedules • Hours • Income • Reminders</span>
             </div>
-            <h1 class="text-4xl sm:text-5xl font-extrabold leading-[1.08] mb-3.5 text-white tracking-tight">
+            <h1 class="text-[42px] sm:text-5xl font-extrabold leading-[1.05] mb-4 text-white tracking-tight">
                 One app.<br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow via-amber-300 to-app-green">Infinite control</span><br>
                 of your time.
             </h1>
-            <p class="text-gray-300 text-base sm:text-lg leading-relaxed font-normal">
+            <p class="text-gray-200 text-[17px] sm:text-lg leading-relaxed font-normal">
                 Create work schedules, analyze your working hours, and forecast your income. 
-                <span class="text-app-yellow font-semibold block sm:inline mt-1 sm:mt-0">Try Premium free for 30 days.</span>
+                <span class="text-app-yellow font-semibold">Try Premium free for 30 days.</span>
             </p>
         </div>
 
         <!-- Left Side (Desktop) / 2nd Element (Mobile): Phone Mockup Slideshow -->
-        <div class="w-full lg:w-1/2 flex flex-col items-center justify-center shrink-0 my-2 sm:my-4 lg:my-0">
-            <div class="phone-slideshow-container flex items-center justify-center relative mx-auto">
-                <img id="mockup1" src="ENG/mockup1.png" alt="Schedlix App Screen" class="absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]">
-                <img id="mockup2" src="ENG/mockup2.png" alt="Schedlix App Screen" class="absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]">
+        <div class="w-full lg:w-1/2 flex flex-col items-center justify-center shrink-0 my-0 py-0">
+            <div class="phone-slideshow-container flex items-center justify-center relative -mx-4 sm:mx-auto my-0 py-0 w-[calc(100%+2rem)] sm:w-full">
+                <!-- Phone Skeleton Loader -->
+                <div id="mockup-skeleton" class="absolute inset-0 w-full h-full bg-[#13151b] border-[4px] border-[#222632] rounded-[44px] p-4 flex flex-col justify-between overflow-hidden shadow-2xl z-0 transition-opacity duration-500">
+                    <!-- Shimmer sweep -->
+                    <div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.04] to-transparent animate-shimmer pointer-events-none"></div>
+                    
+                    <!-- Dynamic Island / Top Notch -->
+                    <div class="flex items-center justify-between pt-1 px-2 shrink-0">
+                        <div class="w-8 h-2.5 bg-[#232733] rounded-full"></div>
+                        <div class="w-20 h-3.5 bg-[#1e222d] rounded-full"></div>
+                        <div class="w-6 h-2.5 bg-[#232733] rounded-full"></div>
+                    </div>
+
+                    <!-- Middle Mockup Blocks -->
+                    <div class="flex flex-col gap-2.5 my-auto w-full px-1">
+                        <div class="w-2/3 h-5 bg-[#232733] rounded-lg"></div>
+                        <div class="w-full h-20 bg-[#191c24] border border-[#272c38]/60 rounded-2xl p-3 flex flex-col justify-between">
+                            <div class="w-2/5 h-3.5 bg-[#262b36] rounded-md"></div>
+                            <div class="w-full h-6 bg-[#212632] rounded-lg"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="h-14 bg-[#191c24] border border-[#272c38]/60 rounded-xl p-2.5">
+                                <div class="w-8 h-2.5 bg-[#262b36] rounded mb-2"></div>
+                                <div class="w-14 h-3.5 bg-[#212632] rounded"></div>
+                            </div>
+                            <div class="h-14 bg-[#191c24] border border-[#272c38]/60 rounded-xl p-2.5">
+                                <div class="w-8 h-2.5 bg-[#262b36] rounded mb-2"></div>
+                                <div class="w-14 h-3.5 bg-[#212632] rounded"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 pt-1">
+                            <div class="w-full h-8 bg-[#191c24] border border-[#272c38]/50 rounded-xl"></div>
+                            <div class="w-full h-8 bg-[#191c24] border border-[#272c38]/50 rounded-xl"></div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Bar -->
+                    <div class="w-24 h-1 bg-[#2e3442] rounded-full mx-auto shrink-0"></div>
+                </div>
+
+                <img id="mockup1" src="ENG/mockup1.png" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10">
+                <img id="mockup2" src="ENG/mockup2.png" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10">
             </div>
         </div>
 
@@ -188,29 +239,29 @@
             <!-- Download Badges + QR Code -->
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center lg:justify-start gap-4 sm:gap-6 mb-6">
                 <!-- Badges -->
-                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center lg:justify-start gap-3 shrink-0">
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center lg:justify-start gap-3.5 sm:gap-3 shrink-0">
                     <!-- App Store Button -->
-                    <a href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-4 py-2.5 rounded-xl transition-all shadow-md hover:scale-[1.02]">
-                        <svg class="w-6 h-6 fill-current shrink-0" viewBox="0 0 24 24">
+                    <a href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3.5 sm:gap-3 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-5 py-3 sm:px-4 sm:py-2.5 rounded-2xl sm:rounded-xl transition-all shadow-lg hover:scale-[1.02]">
+                        <svg class="w-7 h-7 sm:w-6 sm:h-6 fill-current shrink-0" viewBox="0 0 24 24">
                             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
                         </svg>
                         <div class="flex flex-col text-left">
-                            <span class="text-[9px] uppercase tracking-wider text-gray-400 leading-none">Download on the</span>
-                            <span class="text-sm font-semibold tracking-tight leading-tight">App Store</span>
+                            <span class="text-[10px] sm:text-[9px] uppercase tracking-wider text-gray-400 leading-none mb-0.5">Download on the</span>
+                            <span class="text-base sm:text-sm font-bold sm:font-semibold tracking-tight leading-tight">App Store</span>
                         </div>
                     </a>
 
                     <!-- Google Play Button -->
-                    <button onclick="alert('Android version coming soon!')" type="button" class="inline-flex items-center gap-3 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-4 py-2.5 rounded-xl transition-all shadow-md hover:scale-[1.02] text-left">
-                        <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24">
+                    <button onclick="alert('Android version coming soon!')" type="button" class="inline-flex items-center gap-3.5 sm:gap-3 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-5 py-3 sm:px-4 sm:py-2.5 rounded-2xl sm:rounded-xl transition-all shadow-lg hover:scale-[1.02] text-left">
+                        <svg class="w-7 h-7 sm:w-6 sm:h-6 shrink-0" viewBox="0 0 24 24">
                             <path fill="#4285F4" d="M3.61 1.81L13.19 12 3.61 22.19c-.36-.36-.61-.91-.61-1.59V3.4c0-.68.25-1.23.61-1.59z"/>
                             <path fill="#FBBC04" d="M16.59 8.61L13.19 12l3.4 3.39 3.87-2.23c1.1-.64 1.1-1.68 0-2.32l-3.87-2.23z"/>
                             <path fill="#EA4335" d="M13.19 12L3.61 1.81c.5-.5 1.34-.56 2.09-.13l10.89 6.93L13.19 12z"/>
                             <path fill="#34A853" d="M13.19 12l3.4 3.39-10.89 6.93c-.75.43-1.59.37-2.09-.13L13.19 12z"/>
                         </svg>
                         <div class="flex flex-col text-left">
-                            <span class="text-[9px] uppercase tracking-wider text-gray-400 leading-none">GET IT ON</span>
-                            <span class="text-sm font-semibold tracking-tight leading-tight">Google Play</span>
+                            <span class="text-[10px] sm:text-[9px] uppercase tracking-wider text-gray-400 leading-none mb-0.5">GET IT ON</span>
+                            <span class="text-base sm:text-sm font-bold sm:font-semibold tracking-tight leading-tight">Google Play</span>
                         </div>
                     </button>
                 </div>
@@ -223,7 +274,7 @@
             </div>
 
             <!-- Features List -->
-            <div class="flex flex-col gap-2.5 mb-6 max-w-xl">
+            <div class="flex flex-col gap-2.5 my-6 sm:my-0 sm:mb-6 max-w-xl w-fit mx-auto lg:mx-0">
                 <div class="flex items-center gap-3 text-sm text-gray-200">
                     <i data-lucide="calendar" class="w-4 h-4 text-app-yellow shrink-0"></i>
                     <span class="font-medium">10-year auto schedule generation</span>
@@ -247,7 +298,7 @@
             </div>
 
             <!-- Stats / Badges -->
-            <div class="flex flex-wrap items-center gap-3 font-mono text-xs font-semibold tracking-wider text-app-muted uppercase">
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 font-mono text-xs font-semibold tracking-wider text-app-muted uppercase mb-6 sm:mb-0">
                 <div class="flex items-center gap-2">
                     <span class="bg-app-yellow text-black px-2 py-0.5 rounded font-bold">30 DAYS</span>
                     <span>Free Premium</span>
@@ -269,9 +320,9 @@
     <footer class="w-full max-w-6xl xl:max-w-7xl mx-auto py-2 relative z-10 flex flex-col sm:flex-row items-center justify-between gap-2 font-mono text-[11px] text-app-muted uppercase tracking-wider shrink-0 border-t border-app-border/50 pt-3">
         <p>&copy; 2026 Schedlix. ALL RIGHTS RESERVED</p>
         <div class="flex items-center gap-4">
-            <a href="https://schedlix-app.github.io/legal/privacy.html" class="hover:text-white transition-colors duration-200">PRIVACY POLICY</a>
+            <a href="https://schedlix-app.github.io/legal/privacy.html" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">PRIVACY POLICY</a>
             <span class="text-app-border">•</span>
-            <a href="https://schedlix-app.github.io/legal/terms.html" class="hover:text-white transition-colors duration-200">TERMS OF USE</a>
+            <a href="https://schedlix-app.github.io/legal/terms.html" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">TERMS OF USE</a>
         </div>
     </footer>
 
@@ -294,6 +345,24 @@
         let activeElement = 1;
         const imgEl1 = document.getElementById('mockup1');
         const imgEl2 = document.getElementById('mockup2');
+        const skeleton = document.getElementById('mockup-skeleton');
+
+        // Smoothly reveal image and fade out skeleton once ready
+        function revealMockup() {
+            imgEl1.style.opacity = '1';
+            if (skeleton) {
+                skeleton.style.opacity = '0';
+                setTimeout(() => {
+                    if (skeleton) skeleton.style.display = 'none';
+                }, 500);
+            }
+        }
+
+        if (imgEl1.complete && imgEl1.naturalWidth !== 0) {
+            revealMockup();
+        } else {
+            imgEl1.addEventListener('load', revealMockup);
+        }
 
         function switchSlide() {
             const nextIndex = (currentIndex + 1) % totalMockups;
