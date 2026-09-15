@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedlix - Complete Control of Your Time</title>
+    <title>Schedlix — Create Work Schedules, Analyze Hours & Forecast Income</title>
+    <meta name="description" content="Schedlix — create work schedules, analyze your working hours, and forecast your income. Try Premium free for 30 days." />
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffb800'><path d='M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14l-2-2 1.41-1.41L9 11.17l4.59-4.58L15 8l-6 6z'/></svg>">
@@ -18,9 +19,9 @@
                 extend: {
                     colors: {
                         app: {
-                            bg: '#0f0f0f',
-                            panel: '#1a1a1a',
-                            border: '#2a2a2a',
+                            bg: '#0c0d0e',
+                            panel: '#15171c',
+                            border: '#232730',
                             yellow: '#ffb800',
                             green: '#4ade80',
                             text: '#f3f4f6',
@@ -45,30 +46,30 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        body {
-            background-color: #0f0f0f;
+        html, body {
+            height: 100%;
+            background-color: #0c0d0e;
             color: #f3f4f6;
-            overflow-x: hidden;
         }
 
         .ambient-glow-yellow {
             position: fixed;
             top: -10%;
             left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(255, 184, 0, 0.08) 0%, rgba(255,184,0,0) 70%);
+            width: 45vw;
+            height: 45vw;
+            background: radial-gradient(circle, rgba(255, 184, 0, 0.07) 0%, rgba(255,184,0,0) 70%);
             z-index: 0;
             pointer-events: none;
         }
 
         .ambient-glow-green {
             position: fixed;
-            bottom: -20%;
+            bottom: -15%;
             right: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(74, 222, 128, 0.06) 0%, rgba(74,222,128,0) 70%);
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.05) 0%, rgba(74,222,128,0) 70%);
             z-index: 0;
             pointer-events: none;
         }
@@ -80,24 +81,25 @@
         }
 
         .phone-mockup {
-            border: 10px solid #1a1a1a;
-            border-radius: 40px;
+            border: 7px solid #1c1f26;
+            border-radius: 36px;
             overflow: hidden;
-            background-color: #000;
+            background-color: #12141a;
             box-shadow: 
-                0 25px 50px -12px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(255,255,255,0.1),
-                inset 0 0 0 4px #000;
+                0 20px 40px -10px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(255,255,255,0.08);
             position: relative;
-            width: 300px;
-            max-width: 85vw;
-            height: 600px;
-            transform: rotateY(-5deg) rotateX(2deg);
-            transition: transform 0.5s ease;
+            width: 250px;
+            height: 460px;
+            transform: rotateY(-4deg) rotateX(2deg);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
         .phone-container:hover .phone-mockup {
             transform: rotateY(0deg) rotateX(0deg);
+            box-shadow: 
+                0 25px 50px -10px rgba(0, 0, 0, 0.9),
+                0 0 25px rgba(255, 184, 0, 0.1);
         }
 
         .notch {
@@ -105,145 +107,151 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 110px;
-            height: 22px;
-            background-color: #1a1a1a;
-            border-bottom-left-radius: 14px;
-            border-bottom-right-radius: 14px;
+            width: 85px;
+            height: 18px;
+            background-color: #1c1f26;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
             z-index: 20;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-app-yellow selection:text-black">
+<body class="min-h-full lg:h-screen flex flex-col justify-between font-sans antialiased selection:bg-app-yellow selection:text-black overflow-x-hidden lg:overflow-hidden p-4 sm:p-6 lg:p-8">
 
-    <!-- Background Ambient Glow -->
     <div class="ambient-glow-yellow"></div>
     <div class="ambient-glow-green"></div>
 
-    <main class="flex-grow container mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-24 relative z-10">
+    <!-- Header -->
+    <header class="w-full max-w-6xl mx-auto flex items-center justify-between relative z-10 shrink-0 mb-2">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 bg-app-panel border border-app-border rounded-xl flex items-center justify-center text-app-yellow shadow-md">
+                <i data-lucide="calendar-check-2" class="w-5 h-5"></i>
+            </div>
+            <span class="text-2xl font-extrabold tracking-tight text-white">Schedlix</span>
+        </div>
         
-        <!-- Left Side: Phone Mockup -->
-        <div class="w-full lg:w-5/12 flex justify-center lg:justify-end order-2 lg:order-1">
+        <div class="hidden sm:flex items-center gap-2 bg-app-panel/70 border border-app-border px-3 py-1 rounded-full text-xs font-mono text-app-yellow">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+            <span>30 DAYS FREE TRIAL</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="w-full max-w-6xl mx-auto my-auto flex-grow flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 relative z-10 py-2">
+        
+        <!-- Left: Phone + Features -->
+        <div class="w-full lg:w-5/12 flex flex-col items-center justify-center shrink-0">
             <div class="phone-container">
-                <div class="phone-mockup">
+                <div class="phone-mockup flex flex-col items-center justify-center">
                     <div class="notch"></div>
                     <!-- App Screenshot -->
-                    <img src="screenshot.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/400x800/181a20/ffb800?text=Schedlix+App'">
+                    <img src="screenshot.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/400x800/15171c/ffb800?text=Schedlix+App'">
+                </div>
+            </div>
+
+            <!-- Features Under Phone -->
+            <div class="w-full max-w-[340px] mt-4 flex flex-col gap-1.5">
+                <div class="flex items-center gap-2.5 text-xs text-gray-300 bg-app-panel/60 border border-app-border/70 px-3 py-1.5 rounded-lg shadow-sm">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-app-yellow shrink-0"></i>
+                    <span class="font-medium">10-year auto schedule generation</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-xs text-gray-300 bg-app-panel/60 border border-app-border/70 px-3 py-1.5 rounded-lg shadow-sm">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 text-app-green shrink-0"></i>
+                    <span class="font-medium">Hours & estimated income forecasting</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-xs text-gray-300 bg-app-panel/60 border border-app-border/70 px-3 py-1.5 rounded-lg shadow-sm">
+                    <i data-lucide="bell" class="w-3.5 h-3.5 text-app-yellow shrink-0"></i>
+                    <span class="font-medium">Adaptive shift & break reminders</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-xs text-gray-300 bg-app-panel/60 border border-app-border/70 px-3 py-1.5 rounded-lg shadow-sm">
+                    <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-app-green shrink-0"></i>
+                    <span class="font-medium">Home Screen widgets & work timer</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-xs text-gray-300 bg-app-panel/60 border border-app-border/70 px-3 py-1.5 rounded-lg shadow-sm">
+                    <i data-lucide="cloud" class="w-3.5 h-3.5 text-app-yellow shrink-0"></i>
+                    <span class="font-medium">iCloud sync & 1-tap schedule sharing</span>
                 </div>
             </div>
         </div>
 
-        <!-- Right Side: Content -->
-        <div class="w-full lg:w-7/12 flex flex-col order-1 lg:order-2">
+        <!-- Right: Headlines & Badges -->
+        <div class="w-full lg:w-7/12 flex flex-col justify-center">
             
-            <!-- Logo Section -->
-            <div class="flex items-center gap-3 mb-10">
-                <div class="w-10 h-10 bg-app-panel border border-app-border rounded-xl flex items-center justify-center text-app-yellow shadow-lg">
-                    <i data-lucide="calendar-check-2" class="w-6 h-6"></i>
-                </div>
-                <h1 class="text-3xl font-bold tracking-tight text-white">Schedlix</h1>
-            </div>
-
-            <!-- Tagline -->
-            <p class="font-mono text-app-muted uppercase tracking-[0.2em] text-xs font-semibold mb-6">
-                SHIFTS, INCOME AND SO MUCH MORE
+            <p class="font-mono text-app-muted uppercase tracking-[0.2em] text-[11px] font-semibold mb-2">
+                SCHEDULES • HOURS • INCOME • REMINDERS
             </p>
 
-            <!-- Main Headline -->
-            <h2 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] mb-10 text-white tracking-tight">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] mb-4 text-white tracking-tight">
                 One app.<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow to-app-green">Infinite control</span> of your time.
-            </h2>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow to-app-green">Infinite control</span><br>
+                of your time.
+            </h1>
 
-            <!-- Separator -->
-            <div class="w-full h-px bg-app-border mb-10"></div>
+            <!-- Your Pitch -->
+            <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 max-w-xl font-normal">
+                Create work schedules, analyze your working hours, and forecast your income. 
+                <span class="text-app-yellow font-semibold">Try Premium free for 30 days.</span>
+            </p>
 
-            <!-- Two Column Inner Layout (Ratings/QR + Features) -->
-            <div class="flex flex-col sm:flex-row gap-12 sm:gap-16 mb-12">
+            <div class="w-full h-px bg-app-border/80 mb-6"></div>
+
+            <!-- Ratings & QR -->
+            <div class="flex flex-row items-center gap-8 mb-6">
                 
-                <!-- Inner Left: Ratings & Download -->
-                <div class="flex flex-col gap-6 shrink-0">
-                    
-                    <!-- Ratings -->
-                    <div class="flex flex-col gap-3 font-mono text-sm">
-                        <!-- Play Store Rating -->
-                        <div class="flex items-center gap-3">
-                            <span class="text-white font-bold w-6">4.7</span>
-                            <svg class="w-4 h-4 fill-current text-app-muted" viewBox="0 0 24 24">
-                                <path d="M4 3.5v17c0 .6.6.9 1.1.6l14.4-8.5c.5-.3.5-1 0-1.3L5.1 2.8c-.5-.3-1.1 0-1.1.7z"/>
-                            </svg>
-                            <div class="flex text-app-yellow gap-0.5">
-                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                                <i data-lucide="star-half" class="w-3.5 h-3.5 fill-current"></i>
-                            </div>
-                        </div>
-                        <!-- App Store Rating -->
-                        <div class="flex items-center gap-3">
-                            <span class="text-white font-bold w-6">4.9</span>
-                            <svg class="w-4 h-4 fill-current text-app-muted" viewBox="0 0 24 24">
-                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
-                            </svg>
-                            <div class="flex text-app-yellow gap-0.5">
-                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            </div>
+                <div class="flex flex-col gap-3 font-mono text-sm shrink-0">
+                    <!-- App Store -->
+                    <div class="flex items-center gap-2.5">
+                        <span class="text-white font-bold w-6">4.9</span>
+                        <svg class="w-3.5 h-3.5 fill-current text-app-muted" viewBox="0 0 24 24">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
+                        </svg>
+                        <div class="flex text-app-yellow gap-0.5">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
                         </div>
                     </div>
-
-                    <!-- QR Code -->
-                    <div class="bg-[#e5e5e5] rounded-[20px] p-4 flex flex-col items-center justify-center w-[140px] shadow-xl hover:scale-105 transition-transform">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://schedlix-app.github.io/&color=121212&bgcolor=e5e5e5" alt="QR Code" class="w-24 h-24 mb-3 rounded-md mix-blend-multiply">
-                        <span class="font-mono text-[9px] font-bold text-black uppercase tracking-widest text-center leading-tight">Scan to download</span>
+                    <!-- Google Play -->
+                    <div class="flex items-center gap-2.5">
+                        <span class="text-white font-bold w-6">4.7</span>
+                        <svg class="w-3.5 h-3.5 fill-current text-app-muted" viewBox="0 0 24 24">
+                            <path d="M4 3.5v17c0 .6.6.9 1.1.6l14.4-8.5c.5-.3.5-1 0-1.3L5.1 2.8c-.5-.3-1.1 0-1.1.7z"/>
+                        </svg>
+                        <div class="flex text-app-yellow gap-0.5">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            <i data-lucide="star-half" class="w-3.5 h-3.5 fill-current"></i>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Inner Right: Feature List -->
-                <ul class="flex flex-col gap-6 text-lg font-medium text-gray-200">
-                    <li class="flex items-center gap-4 hover:text-white transition-colors group">
-                        <i data-lucide="bell" class="w-5 h-5 text-app-yellow group-hover:scale-110 transition-transform"></i>
-                        <span>Fast shift reminders</span>
-                    </li>
-                    <li class="flex items-center gap-4 hover:text-white transition-colors group">
-                        <i data-lucide="pie-chart" class="w-5 h-5 text-app-green group-hover:scale-110 transition-transform"></i>
-                        <span>Innovative income tracking</span>
-                    </li>
-                    <li class="flex items-center gap-4 hover:text-white transition-colors group">
-                        <i data-lucide="calendar-range" class="w-5 h-5 text-app-yellow group-hover:scale-110 transition-transform"></i>
-                        <span>Flexible scheduling modes</span>
-                    </li>
-                    <li class="flex items-center gap-4 hover:text-white transition-colors group">
-                        <i data-lucide="bar-chart-3" class="w-5 h-5 text-app-green group-hover:scale-110 transition-transform"></i>
-                        <span>Deep statistical insights</span>
-                    </li>
-                    <li class="flex items-center gap-4 hover:text-white transition-colors group">
-                        <i data-lucide="book-marked" class="w-5 h-5 text-app-yellow group-hover:scale-110 transition-transform"></i>
-                        <span>Personalised daily notes</span>
-                    </li>
-                </ul>
+                <!-- QR Code Box -->
+                <div class="bg-[#f0f0f0] rounded-2xl p-3 flex flex-col items-center justify-center w-[125px] shadow-lg hover:scale-105 transition-transform shrink-0">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://schedlix-app.github.io/&color=121212&bgcolor=f0f0f0" alt="QR Code" class="w-20 h-20 mb-1.5 rounded mix-blend-multiply">
+                    <span class="font-mono text-[8px] font-bold text-black uppercase tracking-widest text-center leading-tight">Scan to download</span>
+                </div>
+
             </div>
 
-            <!-- Separator -->
-            <div class="w-full h-px bg-app-border mb-8"></div>
+            <div class="w-full h-px bg-app-border/80 mb-6"></div>
 
-            <!-- Badges / Stats Block -->
-            <div class="flex flex-wrap items-center gap-6 font-mono text-xs sm:text-sm font-semibold tracking-wider text-app-muted uppercase">
-                <div class="flex items-center gap-3">
-                    <span class="bg-app-yellow text-black px-2.5 py-1 rounded-md font-bold">24/7</span>
-                    <span>Availability</span>
+            <!-- Stats / Features Badges -->
+            <div class="flex flex-wrap items-center gap-3 sm:gap-4 font-mono text-xs font-semibold tracking-wider text-app-muted uppercase">
+                <div class="flex items-center gap-2">
+                    <span class="bg-app-yellow text-black px-2 py-0.5 rounded font-bold">30 DAYS</span>
+                    <span>Free Premium</span>
                 </div>
-                <div class="flex items-center gap-3">
-                    <span class="bg-app-green text-black px-2.5 py-1 rounded-md font-bold">1000+</span>
-                    <span>Shifts logged</span>
+                <div class="flex items-center gap-2">
+                    <span class="bg-app-green text-black px-2 py-0.5 rounded font-bold">10 YRS</span>
+                    <span>Auto-Schedule</span>
                 </div>
-                <div class="flex items-center gap-3">
-                    <span class="bg-app-yellow text-black px-2.5 py-1 rounded-md font-bold">10K+</span>
-                    <span>Users yearly</span>
+                <div class="flex items-center gap-2">
+                    <span class="bg-app-yellow text-black px-2 py-0.5 rounded font-bold">100%</span>
+                    <span>Private & iCloud</span>
                 </div>
             </div>
 
@@ -251,10 +259,13 @@
     </main>
 
     <!-- Footer -->
-    <footer class="w-full py-8 text-center sm:text-left container mx-auto px-6 relative z-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 font-mono text-xs text-app-muted uppercase tracking-widest mt-auto pb-12">
+    <footer class="w-full max-w-6xl mx-auto py-2 relative z-10 flex flex-col sm:flex-row items-center justify-between gap-2 font-mono text-[11px] text-app-muted uppercase tracking-wider shrink-0 border-t border-app-border/50 pt-3">
         <p>&copy; 2026 Schedlix. ALL RIGHTS RESERVED</p>
-        <span class="hidden sm:inline-block w-1 h-1 bg-app-border rounded-full mx-2"></span>
-        <a href="/legal/privacy.html" class="hover:text-white transition-colors duration-200">PRIVACY POLICY</a>
+        <div class="flex items-center gap-4">
+            <a href="/legal/privacy.html" class="hover:text-white transition-colors duration-200">PRIVACY POLICY</a>
+            <span class="text-app-border">•</span>
+            <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">TERMS OF USE (EULA)</a>
+        </div>
     </footer>
 
     <script>
