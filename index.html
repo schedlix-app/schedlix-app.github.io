@@ -67,10 +67,11 @@
             color: #f3f4f6;
         }
 
+        /* Mockup Container with Enlarged Proportions */
         .phone-display-container {
             position: relative;
-            width: 270px;
-            height: 550px;
+            width: 300px;
+            height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -78,25 +79,28 @@
 
         @media (min-width: 1024px) {
             .phone-display-container {
-                width: 320px;
-                height: 650px;
+                width: 360px;
+                height: 720px;
             }
         }
 
         @media (min-width: 1280px) {
             .phone-display-container {
-                width: 345px;
-                height: 700px;
+                width: 390px;
+                height: 760px;
             }
         }
 
+        /* Scaling image to fill transparent padding + edge crop */
         .phone-slide-img {
             position: absolute;
             width: 100%;
             height: 100%;
             object-fit: contain;
+            transform: scale(1.06);
             transition: opacity 600ms ease-in-out;
             filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.85));
+            clip-path: inset(5px);
         }
 
         @keyframes fadeInSafe {
@@ -256,7 +260,6 @@
         const IOS_APP_URL = "https://apps.apple.com/us/app/schedlix/id6773795953";
         const ANDROID_APP_URL = "";
 
-        // 10 mockups inside ENG folder
         const phoneImages = [
             'ENG/mockup1.png',
             'ENG/mockup2.png',
@@ -275,7 +278,6 @@
         const img1 = document.getElementById('phoneMockup1');
         const img2 = document.getElementById('phoneMockup2');
 
-        // Smooth crossfade slideshow (every 2.8s)
         setInterval(() => {
             currentImageIndex = (currentImageIndex + 1) % phoneImages.length;
             const nextSrc = phoneImages[currentImageIndex];
