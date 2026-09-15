@@ -142,15 +142,6 @@
             object-fit: contain;
             object-position: top;
         }
-
-        /* Shimmer Skeleton Animation */
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        .animate-shimmer {
-            animation: shimmer 2.2s infinite ease-in-out;
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between font-sans antialiased selection:bg-app-yellow selection:text-black overflow-x-hidden sm:p-6 lg:p-8">
@@ -221,46 +212,7 @@
         <!-- Left Side (Desktop) / 2nd Element (Mobile): Phone Mockup Slideshow -->
         <div class="w-full lg:w-1/2 flex flex-col items-center justify-center shrink-0 my-0 py-0">
             <div class="phone-slideshow-container flex items-center justify-center relative -mx-4 sm:mx-auto my-0 py-0 w-[calc(100%+2rem)] sm:w-full">
-                <!-- Phone Skeleton Loader -->
-                <div id="mockup-skeleton" class="absolute inset-0 w-full h-full bg-[#13151b] border-[4px] border-[#222632] rounded-[44px] p-4 flex flex-col justify-between overflow-hidden shadow-2xl z-0 transition-opacity duration-500">
-                    <!-- Shimmer sweep -->
-                    <div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.04] to-transparent animate-shimmer pointer-events-none"></div>
-                    
-                    <!-- Dynamic Island / Top Notch -->
-                    <div class="flex items-center justify-between pt-1 px-2 shrink-0">
-                        <div class="w-8 h-2.5 bg-[#232733] rounded-full"></div>
-                        <div class="w-20 h-3.5 bg-[#1e222d] rounded-full"></div>
-                        <div class="w-6 h-2.5 bg-[#232733] rounded-full"></div>
-                    </div>
-
-                    <!-- Middle Mockup Blocks -->
-                    <div class="flex flex-col gap-2.5 my-auto w-full px-1">
-                        <div class="w-2/3 h-5 bg-[#232733] rounded-lg"></div>
-                        <div class="w-full h-20 bg-[#191c24] border border-[#272c38]/60 rounded-2xl p-3 flex flex-col justify-between">
-                            <div class="w-2/5 h-3.5 bg-[#262b36] rounded-md"></div>
-                            <div class="w-full h-6 bg-[#212632] rounded-lg"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="h-14 bg-[#191c24] border border-[#272c38]/60 rounded-xl p-2.5">
-                                <div class="w-8 h-2.5 bg-[#262b36] rounded mb-2"></div>
-                                <div class="w-14 h-3.5 bg-[#212632] rounded"></div>
-                            </div>
-                            <div class="h-14 bg-[#191c24] border border-[#272c38]/60 rounded-xl p-2.5">
-                                <div class="w-8 h-2.5 bg-[#262b36] rounded mb-2"></div>
-                                <div class="w-14 h-3.5 bg-[#212632] rounded"></div>
-                            </div>
-                        </div>
-                        <div class="space-y-2 pt-1">
-                            <div class="w-full h-8 bg-[#191c24] border border-[#272c38]/50 rounded-xl"></div>
-                            <div class="w-full h-8 bg-[#191c24] border border-[#272c38]/50 rounded-xl"></div>
-                        </div>
-                    </div>
-
-                    <!-- Bottom Bar -->
-                    <div class="w-24 h-1 bg-[#2e3442] rounded-full mx-auto shrink-0"></div>
-                </div>
-
-                <img id="mockup1" src="ENG/mockup1.png" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10">
+                <img id="mockup1" src="ENG/mockup1.png" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 z-10">
                 <img id="mockup2" src="ENG/mockup2.png" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10">
             </div>
 
@@ -422,24 +374,6 @@
         let activeElement = 1;
         const imgEl1 = document.getElementById('mockup1');
         const imgEl2 = document.getElementById('mockup2');
-        const skeleton = document.getElementById('mockup-skeleton');
-
-        // Smoothly reveal image and fade out skeleton once ready
-        function revealMockup() {
-            imgEl1.style.opacity = '1';
-            if (skeleton) {
-                skeleton.style.opacity = '0';
-                setTimeout(() => {
-                    if (skeleton) skeleton.style.display = 'none';
-                }, 500);
-            }
-        }
-
-        if (imgEl1.complete && imgEl1.naturalWidth !== 0) {
-            revealMockup();
-        } else {
-            imgEl1.addEventListener('load', revealMockup);
-        }
 
         function switchSlide() {
             const nextIndex = (currentIndex + 1) % totalMockups;
