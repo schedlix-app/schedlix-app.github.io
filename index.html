@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedlix - Complete Control of Your Time</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config for Schedlix Branding -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        app: {
+                            bg: '#0f0f0f',
+                            panel: '#1a1a1a',
+                            border: '#2a2a2a',
+                            yellow: '#ffb800',
+                            green: '#4ade80',
+                            text: '#f3f4f6',
+                            muted: '#9ca3af'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glow Effects mimicking the Sofascore background but in Schedlix colors */
+        .ambient-glow-yellow {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(255, 184, 0, 0.08) 0%, rgba(255,184,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .ambient-glow-green {
+            position: fixed;
+            bottom: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.06) 0%, rgba(74,222,128,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Phone Mockup Styling */
+        .phone-container {
+            position: relative;
+            z-index: 10;
+            perspective: 1000px;
+        }
+
+        .phone-mockup {
+            border: 10px solid #1a1a1a;
+            border-radius: 40px;
+            overflow: hidden;
+            background-color: #000;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(255,255,255,0.1),
+                inset 0 0 0 4px #000; /* Inner bezel */
+            position: relative;
+            width: 300px;
+            height: 620px;
+            transform: rotateY(-5deg) rotateX(2deg);
+            transition: transform 0.5s ease;
+        }
+
+        .phone-container:hover .phone-mockup {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+
+        /* Dynamic Notch */
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 25px;
+            background-color: #1a1a1a;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 20;
+        }
+
+        .separator-line {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(42,42,42,1) 0%, rgba(42,42,42,0) 100%);
+            width: 100%;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-app-yellow selection:text-black">
+
+    <!-- Background Elements -->
+    <div class="ambient-glow-yellow"></div>
+    <div class="ambient-glow-green"></div>
+
+    <main class="flex-grow container mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-24 relative z-10">
+        
+        <!-- Left Side: Phone Mockup -->
+        <div class="w-full lg:w-5/12 flex justify-center lg:justify-end order-2 lg:order-1">
+            <div class="phone-container">
+                <div class="phone-mockup">
+                    <div class="notch"></div>
+                    <!-- App Screenshot -->
+                    <img src="image_30278e.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/400x800/1a1a1a/ffb800?text=App+Screenshot'">
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Content (Sofascore Style) -->
+        <div class="w-full lg:w-7/12 flex flex-col order-1 lg:order-2">
+            
+            <!-- Logo Section -->
+            <div class="flex items-center gap-3 mb-10">
+                <div class="w-10 h-10 bg-app-panel border border-app-border rounded-xl flex items-center justify-center text-app-yellow shadow-lg">
+                    <i data-lucide="calendar-check-2" class="w-6 h-6"></i>
+                </div>
+                <h1 class="text-3xl font-bold tracking-tight text-white">Schedlix</h1>
+            </div>
+
+            <!-- Tagline -->
+            <p class="font-mono text-app-muted uppercase tracking-[0.2em] text-xs font-semibold mb-6">
+                SHIFTS, INCOME AND SO MUCH MORE
+            </p>
+
+            <!-- Main Headline -->
+            <h2 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] mb-10 text-white tracking-tight">
+                One app.<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow to-app-green">Infinite control</span> of your time.
+            </h2>
+
+            <!-- Separator -->
+            <div class="w-full h-px bg-app-border mb-10"></div>
+
+            <!-- Two Column Inner Layout (Ratings/QR + Features) -->
+            <div class="flex flex-col sm:flex-row gap-12 sm:gap-16 mb-12">
+                
+                <!-- Inner Left: Ratings & Download -->
+                <div class="flex flex-col gap-6 shrink-0">
+                    
+                    <!-- Ratings -->
+                    <div class="flex flex-col gap-3 font-mono text-sm">
+                        <!-- Play Store -->
+                        <div class="flex items-center gap-3">
+                            <span class="text-white font-bold w-6">4.7</span>
+                            <i data-lucide="play" class="w-4 h-4 text-app-muted fill-current"></i>
+                            <div class="flex text-app-yellow gap-0.5">
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                <i data-lucide="star-half" class="w-3.5 h-3.5 fill-current"></i>
+                            </div>
+                        </div>
+                        <!-- App Store -->
+                        <div class="flex items-center gap-3">
+                            <span class="text-white font-bold w-6">4.9</span>
+                            <i data-lucide="apple" class="w-4 h-4 text-app-muted fill-current"></i>
+                            <div class="flex text-app-yellow gap-0.5">
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QR Code (Styled like Sofascore's light box) -->
+                    <div class="bg-[#e5e5e5] rounded-[20px] p-4 flex flex-col items-center justify-center w-[140px] shadow-xl">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://example.com/download&color=121212&bgcolor=e5e5e5" alt="QR Code" class="w-24 h-24 mb-3 rounded-md mix-blend-multiply">
+                        <span class="font-mono text-[9px] font-bold text-black uppercase tracking-widest text-center leading-tight">Scan to download</span>
+                    </div>
+                </div>
+
+                <!-- Inner Right: Feature List -->
+                <ul class="flex flex-col gap-6 text-lg font-medium text-gray-200">
+                    <li class="flex items-center gap-4 hover:text-white transition-colors group">
+                        <i data-lucide="bell" class="w-5 h-5 text-app-yellow group-hover:scale-110 transition-transform"></i>
+                        <span>Fast shift reminders</span>
+                    </li>
+                    <li class="flex items-center gap-4 hover:text-white transition-colors group">
+                        <i data-lucide="pie-chart" class="w-5 h-5 text-app-green group-hover:scale-110 transition-transform"></i>
+                        <span>Innovative income tracking</span>
+                    </li>
+                    <li class="flex items-center gap-4 hover:text-white transition-colors group">
+                        <i data-lucide="calendar-range" class="w-5 h-5 text-app-yellow group-hover:scale-110 transition-transform"></i>
+                        <span>Flexible scheduling modes</span>
+                    </li>
+                    <li class="flex items-center gap-4 hover:text-white transition-colors group">
+                        <i data-lucide="bar-chart-3" class="w-5 h-5 text-app-green group-hover:scale-110 transition-transform"></i>
+                        <span>Deep statistical insights</span>
+                    </li>
+                    <li class="flex items-center gap-4 hover:text-white transition-colors group">
+                        <i data-lucide="book-marked" class="w-5 h-5 text-app-yellow group-hover:scale-110 transition-transform"></i>
+                        <span>Personalised daily notes</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Separator -->
+            <div class="w-full h-px bg-app-border mb-8"></div>
+
+            <!-- Badges / Stats Block (Sofascore Style) -->
+            <div class="flex flex-wrap items-center gap-6 font-mono text-xs sm:text-sm font-semibold tracking-wider text-app-muted uppercase">
+                <div class="flex items-center gap-3">
+                    <span class="bg-app-yellow text-black px-2 py-1 rounded">24/7</span>
+                    <span>Availability</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="bg-app-green text-black px-2 py-1 rounded">1000+</span>
+                    <span>Shifts logged</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="bg-app-yellow text-black px-2 py-1 rounded">10K+</span>
+                    <span>Users yearly</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="w-full py-8 text-center sm:text-left container mx-auto px-6 relative z-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 font-mono text-xs text-app-muted uppercase tracking-widest mt-auto pb-12">
+        <p>&copy;2026, ALL RIGHTS RESERVED</p>
+        <span class="hidden sm:inline-block w-1 h-1 bg-app-border rounded-full mx-2"></span>
+        <a href="#" class="hover:text-white transition-colors duration-200">PRIVACY POLICY</a>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
