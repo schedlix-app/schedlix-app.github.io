@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en" class="h-full antialiased">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Schedlix — Create Work Schedules, Analyze Hours & Forecast Income</title>
     <meta name="description" content="Schedlix — create work schedules, analyze your working hours, and forecast your income. Try Premium free for 30 days." />
     
@@ -12,20 +12,19 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tailwind Config for Schedlix Branding -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         app: {
-                            bg: '#0c0d0e',
-                            panel: '#15171c',
-                            border: '#232730',
+                            bg: '#08090a',
+                            panel: '#121418',
+                            border: '#1f232b',
                             yellow: '#ffb800',
                             green: '#4ade80',
                             text: '#f3f4f6',
-                            muted: '#9ca3af'
+                            muted: '#8b94a5'
                         }
                     },
                     fontFamily: {
@@ -48,226 +47,320 @@
     <style>
         html, body {
             height: 100%;
-            background-color: #0c0d0e;
+            background-color: #08090a;
             color: #f3f4f6;
+            scroll-behavior: smooth;
         }
 
-        .ambient-glow-yellow {
+        /* Neon Ambient Glows */
+        .neon-glow-yellow {
             position: fixed;
-            top: -10%;
+            top: -20%;
             left: -10%;
-            width: 45vw;
-            height: 45vw;
-            background: radial-gradient(circle, rgba(255, 184, 0, 0.07) 0%, rgba(255,184,0,0) 70%);
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, rgba(255, 184, 0, 0.12) 0%, rgba(255,184,0,0) 65%);
             z-index: 0;
             pointer-events: none;
+            filter: blur(60px);
         }
 
-        .ambient-glow-green {
+        .neon-glow-green {
             position: fixed;
-            bottom: -15%;
+            bottom: -20%;
             right: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(74, 222, 128, 0.05) 0%, rgba(74,222,128,0) 70%);
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.08) 0%, rgba(74,222,128,0) 65%);
             z-index: 0;
             pointer-events: none;
+            filter: blur(60px);
         }
 
-        .phone-container {
+        /* Neon Text Utilities */
+        .neon-text-main {
+            text-shadow: 0 0 25px rgba(255, 184, 0, 0.35), 0 0 10px rgba(255, 184, 0, 0.2);
+        }
+        
+        .neon-badge {
+            box-shadow: 0 0 15px rgba(255, 184, 0, 0.15), inset 0 0 10px rgba(255, 184, 0, 0.05);
+        }
+
+        /* Static Premium Phone Mockup (No 3D rotation) */
+        .phone-mockup-wrapper {
             position: relative;
             z-index: 10;
-            perspective: 1000px;
+        }
+
+        /* Glowing aura right behind the phone */
+        .phone-mockup-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            right: 5%;
+            bottom: 5%;
+            background: linear-gradient(to bottom right, #ffb800, #4ade80);
+            filter: blur(40px);
+            opacity: 0.15;
+            z-index: -1;
+            border-radius: 40px;
         }
 
         .phone-mockup {
-            border: 7px solid #1c1f26;
-            border-radius: 36px;
+            border: 6px solid #1a1d24;
+            border-radius: 42px;
             overflow: hidden;
-            background-color: #12141a;
+            background-color: #000;
+            /* Static Box Shadow for depth and subtle neon */
             box-shadow: 
-                0 20px 40px -10px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(255,255,255,0.08);
+                0 30px 60px -15px rgba(0, 0, 0, 0.9),
+                0 0 0 1px rgba(255,255,255,0.07),
+                0 0 40px rgba(255, 184, 0, 0.08);
             position: relative;
-            width: 250px;
-            height: 460px;
-            transform: rotateY(-4deg) rotateX(2deg);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            width: 260px;
+            height: 540px;
+            /* Removed rotation transitions */
         }
 
-        .phone-container:hover .phone-mockup {
-            transform: rotateY(0deg) rotateX(0deg);
-            box-shadow: 
-                0 25px 50px -10px rgba(0, 0, 0, 0.9),
-                0 0 25px rgba(255, 184, 0, 0.1);
-        }
-
+        /* Hardware Notch */
         .notch {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 85px;
-            height: 18px;
-            background-color: #1c1f26;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
+            width: 90px;
+            height: 24px;
+            background-color: #1a1d24;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
             z-index: 20;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
         }
+
+        .notch::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #0f1013;
+            border-radius: 50%;
+            box-shadow: inset 0 0 2px rgba(255,255,255,0.1);
+        }
+        
+        .notch::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: rgba(74, 222, 128, 0.6); /* Small neon indicator light */
+            border-radius: 50%;
+            box-shadow: 0 0 4px rgba(74, 222, 128, 0.8);
+        }
+
+        /* Entrance Animations */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-up {
+            opacity: 0;
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
     </style>
 </head>
-<body class="min-h-full lg:h-screen flex flex-col justify-between font-sans antialiased selection:bg-app-yellow selection:text-black overflow-x-hidden lg:overflow-hidden p-4 sm:p-6 lg:p-8">
 
-    <div class="ambient-glow-yellow"></div>
-    <div class="ambient-glow-green"></div>
+<body class="flex flex-col min-h-screen font-sans selection:bg-app-yellow selection:text-black overflow-x-hidden relative">
 
-    <!-- Header -->
-    <header class="w-full max-w-6xl mx-auto flex items-center justify-between relative z-10 shrink-0 mb-2">
-        <div class="flex items-center gap-3">
-            <div class="w-9 h-9 bg-app-panel border border-app-border rounded-xl flex items-center justify-center text-app-yellow shadow-md">
-                <i data-lucide="calendar-check-2" class="w-5 h-5"></i>
+    <!-- Background Neon Ambient Effects -->
+    <div class="neon-glow-yellow"></div>
+    <div class="neon-glow-green"></div>
+
+    <!-- Header Navigation -->
+    <header class="w-full max-w-7xl mx-auto flex items-center justify-between px-6 py-6 relative z-40 shrink-0 animate-fade-up">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-app-panel/80 backdrop-blur-md border border-app-border rounded-xl flex items-center justify-center text-app-yellow shadow-lg">
+                <i data-lucide="calendar-check-2" class="w-5 h-5 drop-shadow-[0_0_8px_rgba(255,184,0,0.5)]"></i>
             </div>
-            <span class="text-2xl font-extrabold tracking-tight text-white">Schedlix</span>
-        </div>
+            <span class="text-2xl font-extrabold tracking-tight text-white drop-shadow-sm">Schedlix</span>
+        </a>
         
-        <div class="hidden sm:flex items-center gap-2 bg-app-panel/70 border border-app-border px-3 py-1 rounded-full text-xs font-mono text-app-yellow">
+        <!-- Trial Badge (Desktop Only) -->
+        <div class="hidden sm:flex items-center gap-2 bg-[#ffb800]/10 border border-[#ffb800]/20 px-4 py-1.5 rounded-full text-[11px] font-mono font-bold text-app-yellow neon-badge">
             <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
             <span>30 DAYS FREE TRIAL</span>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="w-full max-w-6xl mx-auto my-auto flex-grow flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 relative z-10 py-2">
+    <!-- Main Content Area: Utilizing CSS Grid for precise Mobile/Desktop Reordering -->
+    <main class="w-full max-w-7xl mx-auto flex-grow px-6 py-6 lg:py-8 flex flex-col justify-center relative z-20">
         
-        <!-- Left: Phone + Features -->
-        <div class="w-full lg:w-5/12 flex flex-col items-center justify-center shrink-0">
-            <div class="phone-container">
-                <div class="phone-mockup flex flex-col items-center justify-center">
-                    <div class="notch"></div>
-                    <!-- App Screenshot -->
-                    <img src="screenshot.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/400x800/15171c/ffb800?text=Schedlix+App'">
-                </div>
-            </div>
+        <!-- GRID: 1 col on mobile, 12 cols on desktop -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-12 xl:gap-x-16 items-center">
 
-            <!-- Features Under Phone -->
-            <div class="w-full max-w-[340px] mt-4 flex flex-col gap-1.5">
-                <div class="flex items-center gap-2.5 text-xs text-gray-300 bg-app-panel/60 border border-app-border/70 px-3 py-1.5 rounded-lg shadow-sm">
-                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-app-yellow shrink-0"></i>
-                    <span class="font-medium">10-year auto schedule generation</span>
-                </div>
-                <div class="flex items-center gap-2.5 text-xs text-gray-300 bg-app-panel/60 border border-app-border/70 px-3 py-1.5 rounded-lg shadow-sm">
-                    <i data-lucide="calculator" class="w-3.5 h-3.5 text-app-green shrink-0"></i>
-                    <span class="font-medium">Hours & estimated income forecasting</span>
-                </div>
-                <div class="flex items-center gap-2.5 text-xs text-gray-300 bg-app-panel/60 border border-app-border/70 px-3 py-1.5 rounded-lg shadow-sm">
-                    <i data-lucide="bell" class="w-3.5 h-3.5 text-app-yellow shrink-0"></i>
-                    <span class="font-medium">Adaptive shift & break reminders</span>
-                </div>
-                <div class="flex items-center gap-2.5 text-xs text-gray-300 bg-app-panel/60 border border-app-border/70 px-3 py-1.5 rounded-lg shadow-sm">
-                    <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-app-green shrink-0"></i>
-                    <span class="font-medium">Home Screen widgets & work timer</span>
-                </div>
-                <div class="flex items-center gap-2.5 text-xs text-gray-300 bg-app-panel/60 border border-app-border/70 px-3 py-1.5 rounded-lg shadow-sm">
-                    <i data-lucide="cloud" class="w-3.5 h-3.5 text-app-yellow shrink-0"></i>
-                    <span class="font-medium">iCloud sync & 1-tap schedule sharing</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right: Headlines & Badges -->
-        <div class="w-full lg:w-7/12 flex flex-col justify-center">
-            
-            <p class="font-mono text-app-muted uppercase tracking-[0.2em] text-[11px] font-semibold mb-2">
-                SCHEDULES • HOURS • INCOME • REMINDERS
-            </p>
-
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] mb-4 text-white tracking-tight">
-                One app.<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow to-app-green">Infinite control</span><br>
-                of your time.
-            </h1>
-
-            <!-- Your Pitch -->
-            <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 max-w-xl font-normal">
-                Create work schedules, analyze your working hours, and forecast your income. 
-                <span class="text-app-yellow font-semibold">Try Premium free for 30 days.</span>
-            </p>
-
-            <div class="w-full h-px bg-app-border/80 mb-6"></div>
-
-            <!-- Ratings & QR -->
-            <div class="flex flex-row items-center gap-8 mb-6">
+            <!-- ========================================== -->
+            <!-- BLOCK 1: Text Content (Must be TOP on Mobile) -->
+            <!-- ========================================== -->
+            <!-- Mobile: order-1 (Top) | Desktop: Right side, Row 1 -->
+            <div class="order-1 lg:col-span-6 lg:col-start-7 lg:row-start-1 flex flex-col justify-center animate-fade-up delay-100">
                 
-                <div class="flex flex-col gap-3 font-mono text-sm shrink-0">
-                    <!-- App Store -->
-                    <div class="flex items-center gap-2.5">
-                        <span class="text-white font-bold w-6">4.9</span>
-                        <svg class="w-3.5 h-3.5 fill-current text-app-muted" viewBox="0 0 24 24">
-                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
-                        </svg>
-                        <div class="flex text-app-yellow gap-0.5">
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                        </div>
-                    </div>
-                    <!-- Google Play -->
-                    <div class="flex items-center gap-2.5">
-                        <span class="text-white font-bold w-6">4.7</span>
-                        <svg class="w-3.5 h-3.5 fill-current text-app-muted" viewBox="0 0 24 24">
-                            <path d="M4 3.5v17c0 .6.6.9 1.1.6l14.4-8.5c.5-.3.5-1 0-1.3L5.1 2.8c-.5-.3-1.1 0-1.1.7z"/>
-                        </svg>
-                        <div class="flex text-app-yellow gap-0.5">
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                            <i data-lucide="star-half" class="w-3.5 h-3.5 fill-current"></i>
-                        </div>
-                    </div>
+                <!-- Overline Tags -->
+                <div class="flex flex-wrap items-center gap-2 mb-4">
+                    <span class="font-mono text-app-muted uppercase tracking-[0.2em] text-[10px] sm:text-[11px] font-bold drop-shadow-sm">
+                        SCHEDULES <span class="text-app-border mx-1">•</span> HOURS <span class="text-app-border mx-1">•</span> INCOME <span class="text-app-border mx-1">•</span> REMINDERS
+                    </span>
                 </div>
 
-                <!-- QR Code Box -->
-                <div class="bg-[#f0f0f0] rounded-2xl p-3 flex flex-col items-center justify-center w-[125px] shadow-lg hover:scale-105 transition-transform shrink-0">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://schedlix-app.github.io/&color=121212&bgcolor=f0f0f0" alt="QR Code" class="w-20 h-20 mb-1.5 rounded mix-blend-multiply">
-                    <span class="font-mono text-[8px] font-bold text-black uppercase tracking-widest text-center leading-tight">Scan to download</span>
+                <!-- Primary Headline with Neon Highlight -->
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.08] mb-6 text-white tracking-tight">
+                    One app.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow via-[#ffd666] to-app-green neon-text-main pb-1 inline-block">Infinite control</span><br>
+                    of your time.
+                </h1>
+
+                <!-- App Pitch / Description -->
+                <p class="text-gray-300/90 text-base sm:text-lg leading-relaxed max-w-xl font-normal drop-shadow-md">
+                    Create work schedules, analyze your working hours, and forecast your income. 
+                    <span class="text-app-yellow font-semibold whitespace-nowrap">Try Premium free for 30 days.</span>
+                </p>
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- BLOCK 2: Phone Mockup (Must be MIDDLE on Mobile) -->
+            <!-- ========================================== -->
+            <!-- Mobile: order-2 (Middle) | Desktop: Left side, Row 1 -->
+            <div class="order-2 lg:col-span-5 xl:col-span-5 lg:col-start-1 lg:row-start-1 flex justify-center lg:justify-end w-full animate-fade-up delay-200 pt-4 lg:pt-0">
+                
+                <!-- Static Phone Container (No Hover Rotations) -->
+                <div class="phone-mockup-wrapper">
+                    <div class="phone-mockup">
+                        <div class="notch"></div>
+                        <!-- UI Screenshot -->
+                        <img src="screenshot.png" alt="Schedlix App Interface" class="w-full h-full object-cover object-top opacity-95 hover:opacity-100 transition-opacity duration-300" onerror="this.src='https://placehold.co/520x1080/121418/ffb800?text=Schedlix+App&font=Inter'">
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- BLOCK 3: Ratings & QR (Must be BOTTOM on Mobile) -->
+            <!-- ========================================== -->
+            <!-- Mobile: order-3 (Bottom-1) | Desktop: Right side, Row 2 -->
+            <div class="order-3 lg:col-span-6 lg:col-start-7 lg:row-start-2 flex flex-col justify-start animate-fade-up delay-300">
+                
+                <div class="w-full h-px bg-app-border/60 mb-8 hidden lg:block"></div>
+                <div class="w-full h-px bg-app-border/40 mb-8 lg:hidden mt-2"></div>
+
+                <div class="flex flex-row items-center gap-6 sm:gap-8 mb-8">
+                    
+                    <!-- App Store & Play Store Ratings Flex -->
+                    <div class="flex flex-col gap-4 font-mono text-sm shrink-0">
+                        <!-- Apple -->
+                        <div class="flex items-center gap-3">
+                            <span class="text-white font-extrabold text-[17px] w-8 drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">4.9</span>
+                            <svg class="w-4 h-4 fill-current text-white/70" viewBox="0 0 24 24">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
+                            </svg>
+                            <div class="flex text-app-yellow gap-0.5 drop-shadow-[0_0_8px_rgba(255,184,0,0.6)]">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Google Play -->
+                        <div class="flex items-center gap-3">
+                            <span class="text-white font-extrabold text-[17px] w-8 drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">4.7</span>
+                            <svg class="w-4 h-4 fill-current text-white/70" viewBox="0 0 24 24">
+                                <path d="M4 3.5v17c0 .6.6.9 1.1.6l14.4-8.5c.5-.3.5-1 0-1.3L5.1 2.8c-.5-.3-1.1 0-1.1.7z"/>
+                            </svg>
+                            <div class="flex text-app-yellow gap-0.5 drop-shadow-[0_0_8px_rgba(255,184,0,0.6)]">
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                <i data-lucide="star-half" class="w-4 h-4 fill-current"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Neon-styled QR Code -->
+                    <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-2.5 flex flex-col items-center justify-center w-auto hover:bg-white/10 hover:border-app-yellow/40 transition-all duration-300 shrink-0">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://schedlix-app.github.io/&color=ffffff&bgcolor=08090a" alt="QR Code" class="w-16 h-16 sm:w-20 sm:h-20 mb-1.5 rounded-lg">
+                        <span class="font-mono text-[8px] sm:text-[9px] font-bold text-app-yellow uppercase tracking-widest text-center leading-tight">Scan App</span>
+                    </div>
+
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="flex flex-wrap items-center gap-3 font-mono text-xs font-semibold tracking-wide text-app-muted uppercase">
+                    <div class="flex items-center gap-2 bg-app-panel/50 border border-white/5 pl-1 pr-3 py-1 rounded-md">
+                        <span class="bg-app-yellow text-black px-1.5 py-0.5 rounded font-bold shadow-[0_0_10px_rgba(255,184,0,0.4)]">30 DAYS</span>
+                        <span class="pt-px text-[10px] sm:text-xs">Free Premium</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-app-panel/50 border border-white/5 pl-1 pr-3 py-1 rounded-md">
+                        <span class="bg-app-green text-black px-1.5 py-0.5 rounded font-bold shadow-[0_0_10px_rgba(74,222,128,0.3)]">10 YRS</span>
+                        <span class="pt-px text-[10px] sm:text-xs">Auto-Schedule</span>
+                    </div>
                 </div>
 
             </div>
 
-            <div class="w-full h-px bg-app-border/80 mb-6"></div>
 
-            <!-- Stats / Features Badges -->
-            <div class="flex flex-wrap items-center gap-3 sm:gap-4 font-mono text-xs font-semibold tracking-wider text-app-muted uppercase">
-                <div class="flex items-center gap-2">
-                    <span class="bg-app-yellow text-black px-2 py-0.5 rounded font-bold">30 DAYS</span>
-                    <span>Free Premium</span>
+            <!-- ========================================== -->
+            <!-- BLOCK 4: Features List (Must be BOTTOM on Mobile) -->
+            <!-- ========================================== -->
+            <!-- Mobile: order-4 (Bottom-2) | Desktop: Left side, Row 2 -->
+            <div class="order-4 lg:col-span-5 lg:col-start-1 lg:row-start-2 flex flex-col items-center lg:items-end w-full animate-fade-up delay-400 lg:pr-8">
+                
+                <div class="w-full max-w-[280px] lg:max-w-full lg:w-[260px] flex flex-col gap-2">
+                    <div class="flex items-center gap-3 text-xs text-gray-200 bg-app-panel/50 backdrop-blur-sm border border-app-border/80 px-4 py-2.5 rounded-xl shadow-lg">
+                        <i data-lucide="calendar" class="w-4 h-4 text-app-yellow shrink-0 drop-shadow-[0_0_5px_rgba(255,184,0,0.5)]"></i>
+                        <span class="font-medium tracking-wide">10-year auto schedule</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-gray-200 bg-app-panel/50 backdrop-blur-sm border border-app-border/80 px-4 py-2.5 rounded-xl shadow-lg">
+                        <i data-lucide="calculator" class="w-4 h-4 text-app-green shrink-0 drop-shadow-[0_0_5px_rgba(74,222,128,0.5)]"></i>
+                        <span class="font-medium tracking-wide">Income & hours forecasting</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-gray-200 bg-app-panel/50 backdrop-blur-sm border border-app-border/80 px-4 py-2.5 rounded-xl shadow-lg">
+                        <i data-lucide="bell" class="w-4 h-4 text-app-yellow shrink-0 drop-shadow-[0_0_5px_rgba(255,184,0,0.5)]"></i>
+                        <span class="font-medium tracking-wide">Adaptive shift reminders</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs text-gray-200 bg-app-panel/50 backdrop-blur-sm border border-app-border/80 px-4 py-2.5 rounded-xl shadow-lg">
+                        <i data-lucide="layout-grid" class="w-4 h-4 text-app-green shrink-0 drop-shadow-[0_0_5px_rgba(74,222,128,0.5)]"></i>
+                        <span class="font-medium tracking-wide">Widgets & work timer</span>
+                    </div>
                 </div>
-                <div class="flex items-center gap-2">
-                    <span class="bg-app-green text-black px-2 py-0.5 rounded font-bold">10 YRS</span>
-                    <span>Auto-Schedule</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <span class="bg-app-yellow text-black px-2 py-0.5 rounded font-bold">100%</span>
-                    <span>Private & iCloud</span>
-                </div>
+
             </div>
 
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="w-full max-w-6xl mx-auto py-2 relative z-10 flex flex-col sm:flex-row items-center justify-between gap-2 font-mono text-[11px] text-app-muted uppercase tracking-wider shrink-0 border-t border-app-border/50 pt-3">
-        <p>&copy; 2026 Schedlix. ALL RIGHTS RESERVED</p>
-        <div class="flex items-center gap-4">
-            <a href="/legal/privacy.html" class="hover:text-white transition-colors duration-200">PRIVACY POLICY</a>
-            <span class="text-app-border">•</span>
-            <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">TERMS OF USE (EULA)</a>
+    <!-- Footer Section -->
+    <footer class="w-full max-w-7xl mx-auto px-6 py-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] sm:text-[11px] text-app-muted uppercase tracking-wider shrink-0 animate-fade-up delay-400">
+        
+        <p class="order-2 md:order-1 text-center md:text-left drop-shadow-sm">&copy; 2026 Schedlix. ALL RIGHTS RESERVED</p>
+        
+        <div class="order-1 md:order-2 flex flex-wrap items-center justify-center md:justify-end gap-x-4 gap-y-2">
+            <a href="#" class="hover:text-white hover:underline underline-offset-4 transition-all duration-200">PRIVACY POLICY</a>
+            <span class="text-white/10 hidden sm:inline">•</span>
+            <a href="#" class="hover:text-white hover:underline underline-offset-4 transition-all duration-200">TERMS OF USE (EULA)</a>
         </div>
     </footer>
 
+    <!-- Initialize Lucide Icons -->
     <script>
         lucide.createIcons();
     </script>
