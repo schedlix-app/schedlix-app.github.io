@@ -238,8 +238,8 @@
         <!-- Left Side (Desktop) / 2nd Element (Mobile): Phone Mockup Slideshow -->
         <div class="w-full lg:w-1/2 flex flex-col items-center justify-center shrink-0 my-0 py-0">
             <div class="phone-slideshow-container flex items-center justify-center relative -mx-4 sm:mx-auto my-0 py-0 w-[calc(100%+2rem)] sm:w-full">
-                <img id="mockup1" src="ENG/mockup1.png" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 z-10">
-                <img id="mockup2" src="ENG/mockup2.png" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10">
+                <img id="mockup1" src="ENG/mockup1.webp" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 z-10">
+                <img id="mockup2" src="ENG/mockup2.webp" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10">
             </div>
 
             <!-- Mobile-Only Download Badges (Immediately Below Mockup) -->
@@ -396,7 +396,7 @@
         // Preload all 11 mockups into browser cache
         for (let i = 1; i <= totalMockups; i++) {
             const img = new Image();
-            img.src = `ENG/mockup${i}.png`;
+            img.src = `ENG/mockup${i}.webp`;
             preloadedImages.push(img);
         }
 
@@ -407,7 +407,7 @@
 
         function switchSlide() {
             const nextIndex = (currentIndex + 1) % totalMockups;
-            const nextSrc = `ENG/mockup${nextIndex + 1}.png`;
+            const nextSrc = `ENG/mockup${nextIndex + 1}.webp`;
 
             if (activeElement === 1) {
                 imgEl2.src = nextSrc;
