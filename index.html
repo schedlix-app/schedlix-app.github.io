@@ -293,8 +293,8 @@
         <!-- Left Side (Desktop) / 2nd Element (Mobile): Phone Mockup Slideshow -->
         <div class="w-full lg:w-1/2 flex flex-col items-center justify-center shrink-0 my-0 py-0">
             <div class="phone-slideshow-container flex items-center justify-center relative -mx-4 sm:mx-auto my-0 py-0 w-[calc(100%+2rem)] sm:w-full">
-                <img id="mockup1" src="ENG/mockup1.webp" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 z-10">
-                <img id="mockup2" src="ENG/mockup2.webp" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10">
+                <img id="mockup1" src="ENG/1080/mockup1.png" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 z-10">
+                <img id="mockup2" src="ENG/1080/mockup2.png" alt="Schedlix App Screen" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10">
             </div>
 
             <!-- Mobile-Only Download Badges (Immediately Below Mockup) -->
@@ -442,26 +442,32 @@
 
     <!-- Image Preloader & Slideshow Script -->
     <script>
+        // Screen detection: use 'ENG/1080/' for mobile (<1024px) and 'ENG/' for desktop
+        const isMobile = window.innerWidth < 1024 || (window.matchMedia && window.matchMedia('(max-width: 1023px)').matches);
+        const imgFolder = isMobile ? 'ENG/1080/' : 'ENG/';
 
-        // Slideshow setup
         const totalMockups = 11;
         const preloadedImages = [];
 
-        // Preload all 11 mockups into browser cache
+        // Set initial image source based on device screen
+        const imgEl1 = document.getElementById('mockup1');
+        const imgEl2 = document.getElementById('mockup2');
+        if (imgEl1) imgEl1.src = `${imgFolder}mockup1.png`;
+        if (imgEl2) imgEl2.src = `${imgFolder}mockup2.png`;
+
+        // Preload all 11 mockups into browser cache from appropriate folder
         for (let i = 1; i <= totalMockups; i++) {
             const img = new Image();
-            img.src = `ENG/mockup${i}.webp`;
+            img.src = `${imgFolder}mockup${i}.png`;
             preloadedImages.push(img);
         }
 
         let currentIndex = 0;
         let activeElement = 1;
-        const imgEl1 = document.getElementById('mockup1');
-        const imgEl2 = document.getElementById('mockup2');
 
         function switchSlide() {
             const nextIndex = (currentIndex + 1) % totalMockups;
-            const nextSrc = `ENG/mockup${nextIndex + 1}.webp`;
+            const nextSrc = `${imgFolder}mockup${nextIndex + 1}.png`;
 
             if (activeElement === 1) {
                 imgEl2.src = nextSrc;
