@@ -31,7 +31,7 @@
     <link rel="manifest" href="site.webmanifest">
 
     <!-- Production Compiled Stylesheet (0 render-blocking JS, instant render) -->
-    <link rel="stylesheet" href="style.css?v=1.8">
+    <link rel="stylesheet" href="style.css?v=1.9">
 
     <!-- Non-render-blocking Google Fonts with preconnect & async load -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,11 +41,35 @@
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
     </noscript>
+    <style>
+        /* Reddish Neon Glow between mockup and hero text (Desktop Only) */
+        .ambient-glow-red {
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .ambient-glow-red {
+                display: block;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 48vw;
+                height: 48vw;
+                max-width: 600px;
+                max-height: 600px;
+                background: radial-gradient(circle, rgba(239, 68, 68, 0.065) 0%, rgba(220, 38, 38, 0.035) 45%, rgba(239, 68, 68, 0) 70%);
+                filter: blur(50px);
+                z-index: 0;
+                pointer-events: none;
+            }
+        }
+    </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between font-sans antialiased selection:bg-app-yellow selection:text-black overflow-x-hidden sm:p-6 lg:p-8">
 
     <!-- Ambient Glow Backgrounds -->
     <div class="ambient-glow-yellow"></div>
+    <div class="ambient-glow-red"></div>
     <div class="ambient-glow-green"></div>
 
     <!-- Header -->
