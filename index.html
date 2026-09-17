@@ -6,6 +6,11 @@
     <title>Schedlix — Create Work Schedules, Analyze Hours & Forecast Income</title>
     <meta name="description" content="Schedlix — create work schedules, analyze your working hours, and forecast your income. Try Premium free for 30 days." />
     
+    <!-- Alternate Language Links for SEO -->
+    <link rel="alternate" hreflang="en" href="https://schedlix-app.github.io/">
+    <link rel="alternate" hreflang="uk" href="https://schedlix-app.github.io/ua/">
+    <link rel="alternate" hreflang="x-default" href="https://schedlix-app.github.io/">
+
     <!-- Mobile Status Bar & Theme Color (Matches Dark App Theme) -->
     <meta name="theme-color" content="#0c0d0e">
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0d0e">
@@ -26,7 +31,7 @@
     <link rel="manifest" href="site.webmanifest">
 
     <!-- Production Compiled Stylesheet (0 render-blocking JS, instant render) -->
-    <link rel="stylesheet" href="style.css?v=1.4">
+    <link rel="stylesheet" href="style.css?v=1.5">
 
     <!-- Non-render-blocking Google Fonts with preconnect & async load -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -229,19 +234,19 @@
                 </div>
             </div>
 
-            <!-- Stats / Badges (1 Row on Mobile, Positioned with Features on Desktop) -->
-            <div class="flex flex-nowrap sm:flex-wrap items-center justify-center lg:justify-start gap-1.5 sm:gap-3 font-mono text-[9px] sm:text-xs font-semibold tracking-normal sm:tracking-wider text-app-muted uppercase mb-6 sm:mb-0 w-full shrink-0">
-                <div class="flex items-center gap-1 sm:gap-1.5 shrink-0 whitespace-nowrap">
-                    <span class="bg-app-yellow text-black text-[8.5px] sm:text-xs px-1.5 py-0.5 rounded font-bold">30 DAYS</span>
-                    <span>Free Premium</span>
+            <!-- Stats / Badges (Strict 1 Row on All Devices) -->
+            <div class="stats-badges-row">
+                <div class="stats-badge-item">
+                    <span class="bg-app-yellow text-black text-[8px] sm:text-xs px-1.5 py-0.5 rounded font-bold whitespace-nowrap">30 DAYS</span>
+                    <span class="whitespace-nowrap">Free Premium</span>
                 </div>
-                <div class="flex items-center gap-1 sm:gap-1.5 shrink-0 whitespace-nowrap">
-                    <span class="bg-app-green text-black text-[8.5px] sm:text-xs px-1.5 py-0.5 rounded font-bold">10 YRS</span>
-                    <span>Auto-Schedule</span>
+                <div class="stats-badge-item">
+                    <span class="bg-app-green text-black text-[8px] sm:text-xs px-1.5 py-0.5 rounded font-bold whitespace-nowrap">20 YEARS</span>
+                    <span class="whitespace-nowrap">Schedule & History</span>
                 </div>
-                <div class="flex items-center gap-1 sm:gap-1.5 shrink-0 whitespace-nowrap">
-                    <span class="bg-app-yellow text-black text-[8.5px] sm:text-xs px-1.5 py-0.5 rounded font-bold">100%</span>
-                    <span>Private & iCloud</span>
+                <div class="stats-badge-item">
+                    <span class="bg-red-500 text-white text-[8px] sm:text-xs px-1.5 py-0.5 rounded font-bold whitespace-nowrap">31 LANGUAGES</span>
+                    <span class="whitespace-nowrap">Supported</span>
                 </div>
             </div>
 
