@@ -21,7 +21,7 @@
     <meta name="msapplication-navbutton-color" content="#0c0d0e">
 
     <!-- Preload Hero LCP Image -->
-    <link rel="preload" as="image" href="../ENG/mockup1.png" type="image/png" fetchpriority="high">
+    <link rel="preload" as="image" href="UA/mockup1.png" type="image/png" fetchpriority="high">
 
     <!-- Favicon & App Icons -->
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
@@ -31,7 +31,7 @@
     <link rel="manifest" href="../site.webmanifest">
 
     <!-- Production Compiled Stylesheet (0 render-blocking JS, instant render) -->
-    <link rel="stylesheet" href="../style.css?v=1.6">
+    <link rel="stylesheet" href="../style.css?v=1.8">
 
     <!-- Non-render-blocking Google Fonts with preconnect & async load -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,7 +54,7 @@
             <div class="w-9 h-9 bg-app-panel border border-app-border rounded-lg flex items-center justify-center text-app-yellow shadow-md group-hover:border-app-yellow/50 transition-colors overflow-hidden [transform:translateZ(0)]" style="border-radius: 8px;">
                 <img src="../img/icon.png" alt="Schedlix Logo" width="36" height="36" class="w-full h-full object-cover rounded-lg" style="border-radius: 8px;" onerror="this.style.display='none'">
             </div>
-            <span class="text-2xl font-extrabold tracking-tight text-white group-hover:text-app-yellow transition-colors">Schedlix</span>
+            <span class="text-2xl font-extrabold tracking-tight text-white group-hover:text-app-yellow transition-colors">Schedlix App</span>
         </a>
         
         <div class="trial-badge flex items-center gap-2 bg-app-panel/90 border border-app-yellow/45 px-3.5 py-1.5 rounded-full text-xs font-mono text-app-yellow shrink-0">
@@ -116,8 +116,8 @@
         <!-- Left Side (Desktop) / 2nd Element (Mobile): Phone Mockup Slideshow -->
         <div class="w-full lg:w-1/2 flex flex-col items-center justify-center shrink-0 my-0 py-0">
             <div class="phone-slideshow-container flex items-center justify-center relative -mx-4 sm:mx-auto my-0 py-0 w-[calc(100%+2rem)] sm:w-full">
-                <img id="mockup1" src="../ENG/mockup1.png" alt="Schedlix App Screen" fetchpriority="high" decoding="sync" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 z-10" style="opacity: 1;">
-                <img id="mockup2" src="../ENG/mockup2.png" alt="Schedlix App Screen" decoding="async" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10" style="opacity: 0;">
+                <img id="mockup1" src="UA/mockup1.png" alt="Schedlix App Screen" fetchpriority="high" decoding="sync" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 z-10" style="opacity: 1;">
+                <img id="mockup2" src="UA/mockup2.png" alt="Schedlix App Screen" decoding="async" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10" style="opacity: 0;">
             </div>
 
             <!-- Mobile-Only Download Badges (Immediately Below Mockup) -->
@@ -258,7 +258,7 @@
         <p>&copy; 2026 Schedlix. ВСІ ПРАВА ЗАХИЩЕНІ</p>
         <div class="flex items-center gap-4">
             <a href="https://schedlix-app.github.io/legal/privacy.html" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">ПОЛІТИКА КОНФІДЕНЦІЙНОСТІ</a>
-            <span class="text-app-border"> </span>
+            <span class="text-app-border">•</span>
             <a href="https://schedlix-app.github.io/legal/terms.html" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">УМОВИ ВИКОРИСТАННЯ</a>
         </div>
     </footer>
@@ -268,10 +268,10 @@
         const totalMockups = 11;
         const preloadedImages = [];
 
-        // Preload all 11 mockups into browser cache from ENG folder
+        // Preload all 11 mockups into browser cache from UA folder
         for (let i = 1; i <= totalMockups; i++) {
             const img = new Image();
-            img.src = `../ENG/mockup${i}.png`;
+            img.src = `UA/mockup${i}.png`;
             preloadedImages.push(img);
         }
 
@@ -282,7 +282,7 @@
 
         function switchSlide() {
             const nextIndex = (currentIndex + 1) % totalMockups;
-            const nextSrc = `../ENG/mockup${nextIndex + 1}.png`;
+            const nextSrc = `UA/mockup${nextIndex + 1}.png`;
 
             if (activeElement === 1) {
                 imgEl2.src = nextSrc;
