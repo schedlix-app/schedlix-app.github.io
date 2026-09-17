@@ -122,3 +122,26 @@ body {
     white-space: nowrap;
   }
 }
+
+.hero-title {
+  font-size: clamp(1.75rem, 7.2vw, 2.75rem);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin-bottom: 0.625rem;
+}
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 2.25rem;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+}
+@media (min-width: 1280px) {
+  .hero-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+}
