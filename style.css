@@ -176,3 +176,16 @@ body {
   }
 }
 
+.hero-desc {
+  max-width: 100%;
+}
+@media (min-width: 1024px) {
+  .hero-desc {
+    max-width: 620px;
+    width: 100%;
+  }
+}
+
+
+
+
