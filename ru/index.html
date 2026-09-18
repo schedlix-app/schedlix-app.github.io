@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Schedlix — Умный трекер рабочих графиков, учет часов и дохода</title>
+    <meta name="description" content="Schedlix — умный трекер рабочих графиков, учет отработанных часов и расчет дохода. Попробуйте Премиум бесплатно на 30 дней." />
+    
+    <!-- Alternate Language Links for SEO -->
+    <link rel="alternate" hreflang="en" href="https://schedlix-app.github.io/">
+    <link rel="alternate" hreflang="uk" href="https://schedlix-app.github.io/ua/">
+    <link rel="alternate" hreflang="ru" href="https://schedlix-app.github.io/ru/">
+    <link rel="alternate" hreflang="x-default" href="https://schedlix-app.github.io/">
+
+    <!-- Mobile Status Bar & Theme Color (Matches Dark App Theme) -->
+    <meta name="theme-color" content="#0c0d0e">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0d0e">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0c0d0e">
+    <meta name="color-scheme" content="dark">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-navbutton-color" content="#0c0d0e">
+
+    <!-- Preload Hero LCP Image -->
+    <link rel="preload" as="image" href="ru_mockup/mockup1.png" type="image/png" fetchpriority="high">
+
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="manifest" href="../site.webmanifest">
+
+    <!-- Production Compiled Stylesheet (0 render-blocking JS, instant render) -->
+    <link rel="stylesheet" href="../style.css?v=2.1">
+
+    <!-- Non-render-blocking Google Fonts with preconnect & async load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap">
+    </noscript>
+    <style>
+        body, html {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        }
+
+        /* Reddish Neon Glow between mockup and hero text (Desktop Only) */
+        .ambient-glow-red {
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .ambient-glow-red {
+                display: block;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 48vw;
+                height: 48vw;
+                max-width: 600px;
+                max-height: 600px;
+                background: radial-gradient(circle, rgba(239, 68, 68, 0.065) 0%, rgba(220, 38, 38, 0.035) 45%, rgba(239, 68, 68, 0) 70%);
+                filter: blur(50px);
+                z-index: 0;
+                pointer-events: none;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between font-sans antialiased selection:bg-app-yellow selection:text-black overflow-x-hidden sm:p-6 lg:p-8">
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="ambient-glow-yellow"></div>
+    <div class="ambient-glow-red"></div>
+    <div class="ambient-glow-green"></div>
+
+    <!-- Header -->
+    <header class="w-full max-w-6xl xl:max-w-7xl mx-auto flex items-center justify-end lg:justify-between relative z-10 shrink-0 mb-2 sm:mb-6">
+        <a href="https://schedlix-app.github.io/ru/" class="hidden lg:flex items-center gap-3 group cursor-pointer">
+            <div class="w-9 h-9 bg-app-panel border border-app-border rounded-lg flex items-center justify-center text-app-yellow shadow-md group-hover:border-app-yellow/50 transition-colors overflow-hidden [transform:translateZ(0)]" style="border-radius: 8px;">
+                <img src="../img/icon.png" alt="Schedlix Logo" width="36" height="36" class="w-full h-full object-cover rounded-lg" style="border-radius: 8px;" onerror="this.style.display='none'">
+            </div>
+            <span class="text-2xl font-extrabold tracking-tight text-white group-hover:text-app-yellow transition-colors">Schedlix App</span>
+        </a>
+        
+        <div class="trial-badge flex items-center gap-2 bg-app-panel/90 border border-app-yellow/45 px-3.5 py-1.5 rounded-full text-xs font-mono text-app-yellow shrink-0">
+            <svg class="w-3.5 h-3.5 shrink-0 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                <path d="M5 3v4"/>
+                <path d="M19 17v4"/>
+                <path d="M3 5h4"/>
+                <path d="M17 19h4"/>
+            </svg>
+            <span class="font-semibold whitespace-nowrap">30 ДНЕЙ БЕСПЛАТНО</span>
+        </div>
+    </header>
+
+    <!-- Main Hero Center Section -->
+    <main class="w-full max-w-6xl xl:max-w-7xl mx-auto my-0 lg:my-auto flex-grow flex flex-col lg:flex-row items-center lg:items-start justify-center gap-1 sm:gap-6 lg:gap-14 relative z-10 py-0 sm:py-4 lg:py-2">
+        
+        <!-- Mobile-Only Top Text (Appears First on Mobile) -->
+        <div class="block lg:hidden w-full text-left pt-0">
+            <h1 class="hero-title">
+                <span class="block">Schedlix App.</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow via-amber-300 to-app-green whitespace-nowrap">Умный трекер</span><br>
+                <span class="whitespace-nowrap">рабочих графиков.</span>
+            </h1>
+
+            <!-- Mobile Download Badges (Above Mockup - Centered) -->
+            <div class="flex flex-wrap items-center justify-center gap-3.5" style="margin-top: 22px; margin-bottom: 22px;">
+                <!-- App Store Button -->
+                <a href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3.5 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-5 py-3 rounded-2xl transition-all shadow-lg hover:scale-[1.02] active:scale-95">
+                    <svg class="w-7 h-7 fill-current shrink-0" viewBox="0 0 24 24">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
+                    </svg>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[10px] uppercase tracking-wider text-gray-400 leading-none mb-0.5">Загрузите в</span>
+                        <span class="text-base font-bold tracking-tight leading-tight">App Store</span>
+                    </div>
+                </a>
+
+                <!-- Google Play Button -->
+                <button onclick="alert('Версия для Android скоро появится!')" type="button" class="inline-flex items-center gap-3.5 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-5 py-3 rounded-2xl transition-all shadow-lg hover:scale-[1.02] active:scale-95 text-left">
+                    <svg class="w-7 h-7 shrink-0" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M3.61 1.81L13.19 12 3.61 22.19c-.36-.36-.61-.91-.61-1.59V3.4c0-.68.25-1.23.61-1.59z"/>
+                        <path fill="#FBBC04" d="M16.59 8.61L13.19 12l3.4 3.39 3.87-2.23c1.1-.64 1.1-1.68 0-2.32l-3.87-2.23z"/>
+                        <path fill="#EA4335" d="M13.19 12L3.61 1.81c.5-.5 1.34-.56 2.09-.13l10.89 6.93L13.19 12z"/>
+                        <path fill="#34A853" d="M13.19 12l3.4 3.39-10.89 6.93c-.75.43-1.59.37-2.09-.13L13.19 12z"/>
+                    </svg>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[10px] uppercase tracking-wider text-gray-400 leading-none mb-0.5">Скоро в</span>
+                        <span class="text-base font-bold tracking-tight leading-tight">Google Play</span>
+                    </div>
+                </button>
+            </div>
+
+            <p class="text-gray-200 text-[16px] sm:text-lg leading-relaxed font-normal mb-3.5">
+                Создавайте рабочие графики, анализируйте отработанные часы и прогнозируйте свой доход. 
+                <span class="text-app-yellow font-semibold">Попробуйте Премиум бесплатно на 30 дней.</span>
+            </p>
+        </div>
+
+        <!-- Left Side (Desktop) / 2nd Element (Mobile): Phone Mockup Slideshow -->
+        <div class="w-full lg:w-1/2 flex flex-col items-center justify-center shrink-0 my-0 py-0">
+            <div class="phone-slideshow-container flex items-center justify-center relative -mx-4 sm:mx-auto my-0 py-0 w-[calc(100%+2rem)] sm:w-full">
+                <img id="mockup1" src="ru_mockup/mockup1.png" alt="Schedlix App Screen" fetchpriority="high" decoding="sync" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 z-10" style="opacity: 1;">
+                <img id="mockup2" src="ru_mockup/mockup2.png" alt="Schedlix App Screen" decoding="async" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10" style="opacity: 0;">
+            </div>
+
+            <!-- Mobile-Only Download Badges (Immediately Below Mockup) -->
+            <div class="flex lg:hidden flex-wrap items-center justify-center gap-3.5 mt-4 sm:mt-5 mb-2">
+                <!-- App Store Button -->
+                <a href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3.5 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-5 py-3 rounded-2xl transition-all shadow-lg hover:scale-[1.02] active:scale-95">
+                    <svg class="w-7 h-7 fill-current shrink-0" viewBox="0 0 24 24">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
+                    </svg>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[10px] uppercase tracking-wider text-gray-400 leading-none mb-0.5">Загрузите в</span>
+                        <span class="text-base font-bold tracking-tight leading-tight">App Store</span>
+                    </div>
+                </a>
+
+                <!-- Google Play Button -->
+                <button onclick="alert('Версия для Android скоро появится!')" type="button" class="inline-flex items-center gap-3.5 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-5 py-3 rounded-2xl transition-all shadow-lg hover:scale-[1.02] active:scale-95 text-left">
+                    <svg class="w-7 h-7 shrink-0" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M3.61 1.81L13.19 12 3.61 22.19c-.36-.36-.61-.91-.61-1.59V3.4c0-.68.25-1.23.61-1.59z"/>
+                        <path fill="#FBBC04" d="M16.59 8.61L13.19 12l3.4 3.39 3.87-2.23c1.1-.64 1.1-1.68 0-2.32l-3.87-2.23z"/>
+                        <path fill="#EA4335" d="M13.19 12L3.61 1.81c.5-.5 1.34-.56 2.09-.13l10.89 6.93L13.19 12z"/>
+                        <path fill="#34A853" d="M13.19 12l3.4 3.39-10.89 6.93c-.75.43-1.59.37-2.09-.13L13.19 12z"/>
+                    </svg>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[10px] uppercase tracking-wider text-gray-400 leading-none mb-0.5">Скоро в</span>
+                        <span class="text-base font-bold tracking-tight leading-tight">Google Play</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Side: Content & Features -->
+        <div class="w-full lg:w-1/2 flex flex-col justify-center text-left">
+            
+            <!-- Desktop-Only Text Header -->
+            <div class="hidden lg:block">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-app-panel/90 border border-app-border text-[10px] xl:text-[11px] font-mono text-gray-300 uppercase tracking-normal mb-4 lg:mb-5 shadow-sm whitespace-nowrap">
+                    <span class="w-2 h-2 rounded-full bg-app-yellow animate-pulse shrink-0"></span>
+                    <span>Рабочие графики • Аналитика времени • Прогноз дохода • Умные напоминания • Виджеты</span>
+                </div>
+                <h1 class="text-4xl xl:text-5xl font-extrabold leading-[1.1] mb-4 lg:mb-5 text-white tracking-tight">
+                    <span class="block">Schedlix App.</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-app-yellow via-amber-300 to-app-green whitespace-nowrap">Умный трекер</span><br>
+                    <span class="whitespace-nowrap">рабочих графиков.</span>
+                </h1>
+                <p class="text-gray-300 text-base xl:text-lg leading-relaxed mb-6 lg:mb-7 max-w-xl font-normal">
+                    Создавайте рабочие графики, учитывайте часы и прогнозируйте доход. <span class="text-app-yellow font-semibold">Попробуйте Премиум бесплатно на 30 дней.</span>
+                </p>
+            </div>
+
+            <!-- Desktop-Only Download Badges + QR Code -->
+            <div class="hidden lg:flex flex-wrap items-center justify-start gap-6 mb-6 lg:mb-7">
+                <!-- Badges -->
+                <div class="flex items-center gap-3 shrink-0">
+                    <!-- App Store Button -->
+                    <a href="https://apps.apple.com/us/app/schedlix/id6773795953" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-4 py-2.5 rounded-xl transition-all shadow-md hover:scale-[1.02]">
+                        <svg class="w-6 h-6 fill-current shrink-0" viewBox="0 0 24 24">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.67-1.09 1.74-.95 2.77.99.08 2.03-.52 2.68-1.27z"/>
+                        </svg>
+                        <div class="flex flex-col text-left">
+                            <span class="text-[9px] uppercase tracking-wider text-gray-400 leading-none">Загрузите в</span>
+                            <span class="text-sm font-semibold tracking-tight leading-tight">App Store</span>
+                        </div>
+                    </a>
+
+                    <!-- Google Play Button -->
+                    <button onclick="alert('Версия для Android скоро появится!')" type="button" class="inline-flex items-center gap-3 bg-black hover:bg-[#1a1c22] border border-[#333742] text-white px-4 py-2.5 rounded-xl transition-all shadow-md hover:scale-[1.02] text-left">
+                        <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M3.61 1.81L13.19 12 3.61 22.19c-.36-.36-.61-.91-.61-1.59V3.4c0-.68.25-1.23.61-1.59z"/>
+                            <path fill="#FBBC04" d="M16.59 8.61L13.19 12l3.4 3.39 3.87-2.23c1.1-.64 1.1-1.68 0-2.32l-3.87-2.23z"/>
+                            <path fill="#EA4335" d="M13.19 12L3.61 1.81c.5-.5 1.34-.56 2.09-.13l10.89 6.93L13.19 12z"/>
+                            <path fill="#34A853" d="M13.19 12l3.4 3.39-10.89 6.93c-.75.43-1.59.37-2.09-.13L13.19 12z"/>
+                        </svg>
+                        <div class="flex flex-col text-left">
+                            <span class="text-[9px] uppercase tracking-wider text-gray-400 leading-none">Скоро в</span>
+                            <span class="text-sm font-semibold tracking-tight leading-tight">Google Play</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- QR Code -->
+                <div class="bg-[#f0f0f0] rounded-2xl p-2.5 flex flex-col items-center justify-center w-[115px] shadow-lg hover:scale-105 transition-transform shrink-0">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://schedlix-app.github.io/ru/&color=121212&bgcolor=f0f0f0" alt="QR Code" class="w-16 h-16 mb-1 rounded mix-blend-multiply">
+                    <span class="font-mono text-[8px] font-bold text-black uppercase tracking-widest text-center leading-tight">Сканируйте QR</span>
+                </div>
+            </div>
+
+            <!-- Features List -->
+            <div class="flex flex-col gap-2.5 lg:gap-3.5 my-6 sm:my-0 sm:mb-5 lg:mb-6 max-w-xl w-fit mx-auto lg:mx-0">
+                <div class="feature-item flex items-center gap-3 lg:gap-3.5 text-gray-200">
+                    <svg class="text-app-yellow shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                    <span class="font-medium">Создавай рабочий график до 20 лет в пару кликов</span>
+                </div>
+                <div class="feature-item flex items-center gap-3 lg:gap-3.5 text-gray-200">
+                    <svg class="text-app-green shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span class="font-medium">Отслеживай дневные, ночные и сверхурочные часы</span>
+                </div>
+                <div class="feature-item flex items-center gap-3 lg:gap-3.5 text-gray-200">
+                    <svg class="text-app-yellow shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+                    <span class="font-medium">Прогнозируй и контролируй свой доход</span>
+                </div>
+                <div class="feature-item flex items-center gap-3 lg:gap-3.5 text-gray-200">
+                    <svg class="text-app-green shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                    <span class="font-medium">Получай напоминания о начале и конце смены</span>
+                </div>
+                <div class="feature-item flex items-center gap-3 lg:gap-3.5 text-gray-200">
+                    <svg class="text-app-yellow shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+                    <span class="font-medium">Добавляй виджеты графика работы на экран</span>
+                </div>
+                <div class="feature-item flex items-center gap-3 lg:gap-3.5 text-gray-200">
+                    <svg class="text-app-green shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+                    <span class="font-medium">Фиксируй свои отпуска и больничные</span>
+                </div>
+            </div>
+
+            <!-- Stats / Badges (Strict 1 Row on All Devices) -->
+            <div class="stats-badges-row">
+                <div class="stats-badge-item">
+                    <span class="bg-app-yellow text-black text-[8px] sm:text-xs px-1.5 py-0.5 rounded font-bold whitespace-nowrap">30 ДНЕЙ</span>
+                    <span class="whitespace-nowrap">Бесплатный Премиум</span>
+                </div>
+                <div class="stats-badge-item">
+                    <span class="bg-app-green text-black text-[8px] sm:text-xs px-1.5 py-0.5 rounded font-bold whitespace-nowrap">20 ЛЕТ</span>
+                    <span class="whitespace-nowrap">Планирование графика</span>
+                </div>
+                <div class="stats-badge-item">
+                    <span class="bg-red-500 text-white text-[8px] sm:text-xs px-1.5 py-0.5 rounded font-bold whitespace-nowrap">31 ЯЗЫК</span>
+                    <span class="whitespace-nowrap">Поддержка локализаций</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-6xl xl:max-w-7xl mx-auto py-2 relative z-10 flex flex-col sm:flex-row items-center justify-between gap-2 font-mono text-[11px] text-app-muted uppercase tracking-wider shrink-0 border-t border-app-border/50 pt-3">
+        <p>&copy; 2026 Schedlix. ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
+        <div class="flex items-center gap-4">
+            <a href="https://schedlix-app.github.io/legal/privacy.html" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
+            <span class="text-app-border">•</span>
+            <a href="https://schedlix-app.github.io/legal/terms.html" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">УСЛОВИЯ ИСПОЛЬЗОВАНИЯ</a>
+        </div>
+    </footer>
+
+    <!-- Image Preloader & Slideshow Script -->
+    <script>
+        const totalMockups = 11;
+        const preloadedImages = [];
+
+        // Preload all 11 mockups into browser cache from ru_mockup folder
+        for (let i = 1; i <= totalMockups; i++) {
+            const img = new Image();
+            img.src = `ru_mockup/mockup${i}.png`;
+            preloadedImages.push(img);
+        }
+
+        let currentIndex = 0;
+        let activeElement = 1;
+        const imgEl1 = document.getElementById('mockup1');
+        const imgEl2 = document.getElementById('mockup2');
+
+        function switchSlide() {
+            const nextIndex = (currentIndex + 1) % totalMockups;
+            const nextSrc = `ru_mockup/mockup${nextIndex + 1}.png`;
+
+            if (activeElement === 1) {
+                imgEl2.src = nextSrc;
+                imgEl2.style.opacity = '1';
+                imgEl1.style.opacity = '0';
+                activeElement = 2;
+            } else {
+                imgEl1.src = nextSrc;
+                imgEl1.style.opacity = '1';
+                imgEl2.style.opacity = '0';
+                activeElement = 1;
+            }
+            currentIndex = nextIndex;
+        }
+
+        // Polite delay before first transition to guarantee instant, rock-solid LCP registration
+        setTimeout(() => {
+            setInterval(switchSlide, 3200);
+        }, 4500);
+    </script>
+</body>
+</html>
