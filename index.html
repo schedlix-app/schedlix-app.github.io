@@ -143,7 +143,7 @@
         <div class="w-full lg:w-1/2 flex flex-col items-center justify-center shrink-0 my-0 py-0">
             <div class="phone-slideshow-container flex items-center justify-center relative -mx-4 sm:mx-auto my-0 py-0 w-[calc(100%+2rem)] sm:w-full">
                 <img id="mockup1" src="ENG/mockup1.png" alt="Schedlix App Screen" fetchpriority="high" decoding="sync" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 z-10" style="opacity: 1;">
-                <img id="mockup2" src="ENG/mockup2.png" alt="Schedlix App Screen" decoding="async" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10" style="opacity: 0;">
+                <img id="mockup2" alt="Schedlix App Screen" decoding="async" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10" style="opacity: 0;">
             </div>
 
             <!-- Mobile-Only Download Badges (Immediately Below Mockup) -->
@@ -293,22 +293,45 @@
     <script>
         const totalMockups = 11;
         const preloadedImages = [];
-
-        // Preload all 11 mockups into browser cache from ENG folder
-        for (let i = 1; i <= totalMockups; i++) {
-            const img = new Image();
-            img.src = `ENG/mockup${i}.png`;
-            preloadedImages.push(img);
-        }
-
         let currentIndex = 0;
         let activeElement = 1;
         const imgEl1 = document.getElementById('mockup1');
         const imgEl2 = document.getElementById('mockup2');
+        const mockupFolder = 'ENG';
+
+        // Non-blocking lazy background preloader: runs only after the page has fully loaded
+        function startLazyPreloading() {
+            let nextToLoad = 2;
+            function preloadNext() {
+                if (nextToLoad > totalMockups) return;
+                const img = new Image();
+                img.onload = img.onerror = () => {
+                    preloadedImages.push(img);
+                    nextToLoad++;
+                    if ('requestIdleCallback' in window) {
+                        requestIdleCallback(preloadNext, { timeout: 1500 });
+                    } else {
+                        setTimeout(preloadNext, 300);
+                    }
+                };
+                img.src = `${mockupFolder}/mockup${nextToLoad}.png`;
+            }
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(preloadNext, { timeout: 2000 });
+            } else {
+                setTimeout(preloadNext, 1000);
+            }
+        }
+
+        if (document.readyState === 'complete') {
+            startLazyPreloading();
+        } else {
+            window.addEventListener('load', startLazyPreloading, { once: true });
+        }
 
         function switchSlide() {
             const nextIndex = (currentIndex + 1) % totalMockups;
-            const nextSrc = `ENG/mockup${nextIndex + 1}.png`;
+            const nextSrc = `${mockupFolder}/mockup${nextIndex + 1}.png`;
 
             if (activeElement === 1) {
                 imgEl2.src = nextSrc;
