@@ -21,8 +21,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="msapplication-navbutton-color" content="#0c0d0e">
 
-    <!-- Preload Hero LCP Image -->
-    <link rel="preload" as="image" href="UA/mockup1.png" type="image/png" fetchpriority="high">
+    <!-- Preload Hero LCP Image (WebP on mobile <1024px, PNG on desktop) -->
+    <link rel="preload" as="image" href="UA/mockup1.webp" type="image/webp" media="(max-width: 1023px)" fetchpriority="high">
+    <link rel="preload" as="image" href="UA/mockup1.png" type="image/png" media="(min-width: 1024px)" fetchpriority="high">
 
     <!-- Favicon & App Icons -->
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
@@ -146,7 +147,11 @@
         <!-- Left Side (Desktop) / 2nd Element (Mobile): Phone Mockup Slideshow -->
         <div class="w-full lg:w-1/2 flex flex-col items-center justify-center shrink-0 my-0 py-0">
             <div class="phone-slideshow-container flex items-center justify-center relative -mx-4 sm:mx-auto my-0 py-0 w-[calc(100%+2rem)] sm:w-full">
-                <img id="mockup1" src="UA/mockup1.png" alt="Schedlix App Screen" fetchpriority="high" decoding="sync" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-100 z-10" style="opacity: 1;">
+                <picture id="mockup1" class="mockup-img absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out opacity-100 z-10" style="opacity: 1;">
+                    <source media="(max-width: 1023px)" srcset="UA/mockup1.webp" type="image/webp">
+                    <source media="(min-width: 1024px)" srcset="UA/mockup1.png" type="image/png">
+                    <img id="mockup1-img" src="UA/mockup1.png" alt="Schedlix App Screen" fetchpriority="high" decoding="sync" width="1114" height="1764" class="w-full h-full object-contain object-top">
+                </picture>
                 <img id="mockup2" alt="Schedlix App Screen" decoding="async" width="1114" height="1764" class="mockup-img absolute inset-0 w-full h-full object-contain object-top transition-opacity duration-700 ease-in-out opacity-0 z-10" style="opacity: 0;">
             </div>
 
@@ -299,9 +304,12 @@
         const preloadedImages = [];
         let currentIndex = 0;
         let activeElement = 1;
-        const imgEl1 = document.getElementById('mockup1');
+        const picEl1 = document.getElementById('mockup1');
+        const imgEl1 = document.getElementById('mockup1-img');
         const imgEl2 = document.getElementById('mockup2');
         const mockupFolder = 'UA';
+        const isMobile = window.matchMedia('(max-width: 1023px)').matches;
+        const ext = isMobile ? 'webp' : 'png';
 
         // Non-blocking lazy background preloader: runs only after the page has fully loaded
         function startLazyPreloading() {
@@ -318,7 +326,7 @@
                         setTimeout(preloadNext, 300);
                     }
                 };
-                img.src = `${mockupFolder}/mockup${nextToLoad}.png`;
+                img.src = `${mockupFolder}/mockup${nextToLoad}.${ext}`;
             }
             if ('requestIdleCallback' in window) {
                 requestIdleCallback(preloadNext, { timeout: 2000 });
@@ -335,16 +343,18 @@
 
         function switchSlide() {
             const nextIndex = (currentIndex + 1) % totalMockups;
-            const nextSrc = `${mockupFolder}/mockup${nextIndex + 1}.png`;
+            const nextSrc = `${mockupFolder}/mockup${nextIndex + 1}.${ext}`;
 
             if (activeElement === 1) {
                 imgEl2.src = nextSrc;
                 imgEl2.style.opacity = '1';
-                imgEl1.style.opacity = '0';
+                picEl1.style.opacity = '0';
                 activeElement = 2;
             } else {
                 imgEl1.src = nextSrc;
-                imgEl1.style.opacity = '1';
+                const sources = picEl1.querySelectorAll('source');
+                sources.forEach(s => s.srcset = nextSrc);
+                picEl1.style.opacity = '1';
                 imgEl2.style.opacity = '0';
                 activeElement = 1;
             }
